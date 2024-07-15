@@ -2,7 +2,7 @@
 Projeto: shell-script-mon-speedtest
 Descrição: Este script Bash automatiza o teste de velocidade da conexão à internet usando o speedtest-cli
            da Ookla. Ele instala o speedtest-cli do repositório do Debian para obter resultados dos testes.
-           Além disso, cria um banco de dados MariaDB (MySQL) para armazenar resultados bem-sucedidos e erros dos testes estraido os dados com o comando sed.
+           Além disso, cria um banco de dados MariaDB (MySQL) para armazenar resultados bem-sucedidos e erros dos testes extraindo os dados com o comando sed.
            Este script automatiza o teste de velocidade e a gestão de dados resultantes em um ambiente MariaDB (MySQL), adequado para monitoramento contínuo de conexões de internet.
 Autor: Glauber GF (@mcnd2)
 Data: 15/07/2024
@@ -132,7 +132,7 @@ ou
 
 Um **[CronJob](https://sempreupdate.com.br/linux/tutoriais/o-que-e-um-cronjob-e-como-funciona/)** é uma funcionalidade amplamente utilizada em sistemas operacionais Unix-like, como o Linux, que permite agendar a execução automática de tarefas em determinados intervalos de tempo. Ele é particularmente útil para realizar tarefas repetitivas, agendadas e automáticas, sem a necessidade de uma intervenção humana direta.
 
-Com isso, configure o script para ser executado na seu cronjob em um intervalo de tempo
+Com isso, configure o script para ser executado no seu cronjob em um intervalo de tempo
 de acordo com sua necessidade para coleta de dados do teste.
 
 Para configurar o cronjob, execute o comando abaixo com privilégio de root:
