@@ -11,8 +11,9 @@ Data: 15/07/2024
 # Script de Monitoramento de Teste de Velocidade com Speedtest
 
 ![Image](https://github.com/glaubergf/shell-script-mon-speedtest/blob/main/images/speedtest_results.png)
-![Image](https://github.com/glaubergf/shell-script-mon-speedtest/blob/main/images/speedtest_grafana1.png)
-![Image](https://github.com/glaubergf/shell-script-mon-speedtest/blob/main/images/speedtest_grafana2.png)
+![Image](https://github.com/glaubergf/shell-script-mon-speedtest/blob/main/images/speedtest1_grafana.png)
+![Image](https://github.com/glaubergf/shell-script-mon-speedtest/blob/main/images/speedtest2_grafana.png)
+![Image](https://github.com/glaubergf/shell-script-mon-speedtest/blob/main/images/speedtest3_grafana.png)
 
 A Ookla **[Speedtest](https://www.speedtest.net/pt)** é uma maneira de testar o desempenho e 
 a qualidade de uma conexão de internet. O Speedtest CLI traz a tecnologia confiável e a rede de servidores 

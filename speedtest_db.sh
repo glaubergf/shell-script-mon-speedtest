@@ -53,20 +53,20 @@ DB_USER="speedtest_user"
 DB_PASS="speedtest_passwd"
 DB_NAME="speedtest_db"
 
+## Criar banco de dados se não existir.
+CreateBase="CREATE DATABASE IF NOT EXISTS \`$DB_NAME\`;"
+
+mysql -u"$DB_ROOT_USER" -p"$DB_ROOT_PASS" -e "$CreateBase"
+
 ## Criar usuário e conceder privilégios.
-CreateUser="CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS';
-GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%';
+CreateUser="CREATE USER IF NOT EXISTS \`$DB_USER\`@'%' IDENTIFIED BY '$DB_PASS';
+GRANT ALL PRIVILEGES ON \`$DB_NAME\`.* TO \`$DB_USER\`@'%';
 FLUSH PRIVILEGES;"
 
 mysql -u"$DB_ROOT_USER" -p"$DB_ROOT_PASS" -e "$CreateUser"
 
-## Criar banco de dados se não existir.
-CreateBase="CREATE DATABASE IF NOT EXISTS '$DB_NAME';"
-
-mysql -u"$DB_USER" -p"$DB_PASS" -e "$CreateBase"
-
 ## Criar tabela de resultados se não existir.
-CreateTableResults="CREATE TABLE IF NOT EXISTS speedtest_results (
+CreateTableResults="CREATE TABLE IF NOT EXISTS \`speedtest_results\` (
     id INT AUTO_INCREMENT PRIMARY KEY,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     provider VARCHAR(255),
@@ -83,7 +83,7 @@ CreateTableResults="CREATE TABLE IF NOT EXISTS speedtest_results (
 mysql -u"$DB_USER" -p"$DB_PASS" -D "$DB_NAME" -e "$CreateTableResults"
 
 ## Criar tabela de erros se não existir.
-CreateTableErrors="CREATE TABLE IF NOT EXISTS speedtest_errors (
+CreateTableErrors="CREATE TABLE IF NOT EXISTS \`speedtest_errors\` (
     id INT AUTO_INCREMENT PRIMARY KEY,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     error_message TEXT
@@ -105,7 +105,7 @@ if [ $speedtest_exit_code -ne 0 ]; then
     SpeedtestErro=$(cat "$ERROR_LOG_FILE")
 
     ## Inserir dados de erro na tabela speedtest_errors.
-    EnterError="INSERT INTO speedtest_errors (error_message) VALUES ('$SpeedtestErro');"
+    EnterError="INSERT INTO \`speedtest_errors\` (error_message) VALUES ('$SpeedtestErro');"
     mysql -u"$DB_USER" -p"$DB_PASS" -D "$DB_NAME" -e "$EnterError"
 else
     ## Extrair os dados do speedtest.log.
@@ -120,7 +120,7 @@ else
     SpeedtestURL=$(sed -n 's/Share results: \(http:\/\/www.speedtest.net\/result\/[0-9]*.png\)/\1/p' "$LOG_FILE")
 
     ## Inserir dados completos no banco de dados na tabela speedtest_results.
-    EnterData="INSERT INTO speedtest_results (
+    EnterData="INSERT INTO \`speedtest_results\` (
         provider,
         ip,
         server,

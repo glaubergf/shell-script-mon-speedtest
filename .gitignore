@@ -1,0 +1,9 @@
+## CONFIG .gitignore
+
+## local files
+#cronjob.sh
+speedtest_error.log
+speedtest.log
+speedtest.sh
+speedtest.sh_python
+speedtest_grafana_backup.sql
