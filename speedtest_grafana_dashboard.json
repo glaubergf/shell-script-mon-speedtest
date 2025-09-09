@@ -5,7 +5,7 @@
         "builtIn": 1,
         "datasource": {
           "type": "grafana",
-          "uid": "-- Grafana --"
+          "uid": "P1CDD0E9A0382A773"
         },
         "enable": true,
         "hide": true,
@@ -19,13 +19,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 8,
+  "id": 9,
   "links": [],
   "panels": [
     {
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "cejee58fg8w00a"
+        "uid": "PC25FA8835BF7CBDD"
       },
       "description": "Monitora se o link de internet esta Up ou Down.",
       "fieldConfig": {
@@ -55,7 +55,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           }
@@ -96,7 +97,7 @@
           "countTriggersBy": "",
           "datasource": {
             "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "cejee58fg8w00a"
+            "uid": "PC25FA8835BF7CBDD"
           },
           "evaltype": "0",
           "functions": [],
@@ -104,9 +105,8 @@
             "filter": "Link Internet"
           },
           "host": {
-            "filter": "monitoring - elevalink"
+            "filter": "link internet - Elevalink"
           },
-          "itServiceFilter": "",
           "item": {
             "filter": "ICMP ping"
           },
@@ -131,9 +131,6 @@
           "refId": "A",
           "resultFormat": "time_series",
           "schema": 12,
-          "slaFilter": "",
-          "slaInterval": "none",
-          "slaProperty": "sla",
           "table": {
             "skipEmptyValues": false
           },
@@ -153,7 +150,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse painel mostra o nome do provedor de acesso a internet contratado.",
       "fieldConfig": {
@@ -163,7 +160,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#3893c7"
+                "color": "#3893c7",
+                "value": null
               }
             ]
           }
@@ -208,7 +206,7 @@
           "dataset": "speedtest_grafana",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -254,7 +252,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse painel mostra a média de download do dia atual.",
       "fieldConfig": {
@@ -271,7 +269,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -303,7 +302,7 @@
           "fields": "",
           "values": false
         },
-        "showThresholdLabels": true,
+        "showThresholdLabels": false,
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
@@ -313,7 +312,7 @@
           "dataset": "speedtest_data",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -362,7 +361,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse painel mostra a média de upload do dia atual.",
       "fieldConfig": {
@@ -379,7 +378,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -411,7 +411,7 @@
           "fields": "",
           "values": false
         },
-        "showThresholdLabels": true,
+        "showThresholdLabels": false,
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
@@ -421,7 +421,7 @@
           "dataset": "speedtest_data",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -470,16 +470,13 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse painel mostra a média do ping do dia atual.\n\nPara jogos o aconselhado é uma latência abaixo de 20 ms.\nPara navegar normalmente na web, abaixo de 100 ms é um bom valor.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
-          },
-          "custom": {
-            "neutral": 0
           },
           "decimals": 2,
           "displayName": "média diária",
@@ -490,7 +487,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "#EAB839",
@@ -522,7 +520,7 @@
           "fields": "",
           "values": false
         },
-        "showThresholdLabels": true,
+        "showThresholdLabels": false,
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
@@ -532,7 +530,7 @@
           "dataset": "speedtest_data",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -573,7 +571,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse painel mostra a imagem do último teste feito pelo speedtest.",
       "gridPos": {
@@ -592,6 +590,7 @@
       ],
       "options": {
         "alt_field": "",
+        "autofit": false,
         "height": "75",
         "icon_field": "",
         "open_url": {
@@ -655,7 +654,7 @@
           "dataset": "speedtest_grafana",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -716,7 +715,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse painel mostra o teste de Download pelo SpeedTest a cada 5 minutos configurado na cron do servidor \"Proxmox\".\n\nA Velocidade de download se refere à rapidez com que um arquivo pode ser baixado de um serviço na Internet. Respeitando-se as boas práticas de uso do medidor, os resultados devem ser muito próximos ao valores anunciados por seu provedor de Internet.\n\nSegundo resolução da Anatel, deve-se garantir um valor médio acima de 80% do valor contratado. Mas, caso os resultados persistam abaixo de 40% do valor contratado após diversas medições, você pode cobrar providências junto ao seu provedor.",
       "fieldConfig": {
@@ -765,7 +764,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -795,9 +795,7 @@
           ],
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true,
-          "sortBy": "Last",
-          "sortDesc": false
+          "showLegend": true
         },
         "timezone": [
           "browser"
@@ -812,7 +810,7 @@
           "dataset": "speedtest_data",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -861,7 +859,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse painel mostra a média granular de download.",
       "fieldConfig": {
@@ -878,7 +876,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -912,7 +911,7 @@
           "fields": "",
           "values": false
         },
-        "showThresholdLabels": true,
+        "showThresholdLabels": false,
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
@@ -922,7 +921,7 @@
           "dataset": "speedtest_data",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -971,7 +970,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse painel mostra o teste de Upload pelo SpeedTest a cada 5 minutos configurado na cron do servidor \"Proxmox\".\n\nA Velocidade de upload se refere à rapidez com que um arquivo pode ser enviado a um serviço na Internet. Esse valor costuma ser inferior à velocidade de download, e também deveria estar descrito no contrato com seu provedor de Internet.\n\nAs mesmas regras sobre utilização do medidor e resultados descritas sobre a velocidade de download valem para o teste de upload.",
       "fieldConfig": {
@@ -1019,7 +1018,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -1080,7 +1080,7 @@
           "dataset": "speedtest_data",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -1129,7 +1129,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse painel mostra a média granular de upload.",
       "fieldConfig": {
@@ -1146,7 +1146,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -1180,7 +1181,7 @@
           "fields": "",
           "values": false
         },
-        "showThresholdLabels": true,
+        "showThresholdLabels": false,
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
@@ -1190,7 +1191,7 @@
           "dataset": "speedtest_data",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -1239,7 +1240,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse painel mostra o teste de Latência (Ping) pelo SpeedTest a cada 5 minutos configurado na cron do servidor \"Proxmox\".\n\nO Ping ou latência bidirecional é a medida de tempo para uma mensagem ir a um destino e voltar. Um valor alto afeta principalmente a qualidade da navegação na Web, em jogos on-line e em conversas com transmissão de voz e imagem em vídeo.\n\nPara jogos o aconselhado é uma latência abaixo de 20 ms. Para navegar normalmente na web, abaixo de 100 ms é um bom valor.",
       "fieldConfig": {
@@ -1288,7 +1289,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -1349,7 +1351,7 @@
           "dataset": "speedtest_data",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -1398,16 +1400,13 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse painel mostra a média granular do ping.\n\nPara jogos o aconselhado é uma latência abaixo de 20 ms.\nPara navegar normalmente na web, abaixo de 100 ms é um bom valor.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
-          },
-          "custom": {
-            "neutral": 0
           },
           "decimals": 2,
           "displayName": "Ping",
@@ -1418,7 +1417,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "#EAB839",
@@ -1452,7 +1452,7 @@
           "fields": "",
           "values": false
         },
-        "showThresholdLabels": true,
+        "showThresholdLabels": false,
         "showThresholdMarkers": true,
         "sizing": "auto",
         "text": {}
@@ -1463,7 +1463,7 @@
           "dataset": "speedtest_data",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -1517,7 +1517,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse painel mostra o gráfico de erros categorizado pelo tipo de erro mapeado ou não executado pelo SpeedTest a cada 5 minutos configurado na cron do servidor \"Proxmox\".",
       "fieldConfig": {
@@ -1562,6 +1562,7 @@
               "mode": "line"
             }
           },
+          "decimals": 0,
           "displayName": "Valor do último error",
           "fieldMinMax": false,
           "mappings": [
@@ -1608,8 +1609,23 @@
                   "text": "HTTP Error 503: Service Unavailable"
                 },
                 "9": {
-                  "color": "super-light-yellow",
+                  "color": "dark-purple",
                   "index": 8,
+                  "text": "HTTP Error 520"
+                },
+                "10": {
+                  "color": "dark-green",
+                  "index": 9,
+                  "text": "HTTP Error 429: Too Many Requests"
+                },
+                "11": {
+                  "color": "light-red",
+                  "index": 10,
+                  "text": "[Errno 104] Connection reset by peer"
+                },
+                "12": {
+                  "color": "super-light-yellow",
+                  "index": 11,
                   "text": "Erro Not Mapped"
                 }
               },
@@ -1620,7 +1636,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           }
@@ -1628,7 +1645,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
+        "h": 9,
         "w": 13,
         "x": 0,
         "y": 42
@@ -1656,13 +1673,13 @@
           "dataset": "speedtest_grafana",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT\n  CONVERT_TZ(timestamp, '-03:00', '+00:00') AS time,\n  CASE\n    WHEN error_message LIKE '%Unable to connect to servers to test latency%' THEN 1\n    WHEN error_message LIKE '%[Errno -3] Temporary failure in name resolution%' THEN 2\n    WHEN error_message LIKE '%Could not submit results to speedtest.net%' THEN 3\n    WHEN error_message LIKE '%HTTP Error 403: Forbidden%' THEN 4\n    WHEN error_message LIKE '%The read operation timed out%' THEN 5\n    WHEN error_message LIKE '%urlopen error timed out%' THEN 6\n    WHEN error_message LIKE '%[Errno -2] Name or service not known%' THEN 7\n    WHEN error_message LIKE '%HTTP Error 503: Service Unavailable%' THEN 8\n    ELSE 9\n  END AS valor_erro,\n  CASE\n    WHEN error_message LIKE '%Unable to connect to servers to test latency%' THEN 'Unable to connect to servers to test latency'\n    WHEN error_message LIKE '%[Errno -3] Temporary failure in name resolution%' THEN '[Errno -3] Temporary failure in name resolution'\n    WHEN error_message LIKE '%Could not submit results to speedtest.net%' THEN 'Could not submit results to speedtest.net'\n    WHEN error_message LIKE '%HTTP Error 403: Forbidden%' THEN 'HTTP Error 403: Forbidden'\n    WHEN error_message LIKE '%The read operation timed out%' THEN 'The read operation timed out'\n    WHEN error_message LIKE '%urlopen error timed out%' THEN 'urlopen error timed out'\n    WHEN error_message LIKE '%[Errno -2] Name or service not known%' THEN '[Errno -2] Name or service not known'\n    WHEN error_message LIKE '%HTTP Error 503: Service Unavailable%' THEN 'HTTP Error 503: Service Unavailable'\n    ELSE 'Erro Not Mapped'\n  END AS erros\nFROM\n  speedtest_grafana.speedtest_errors\nWHERE\n  $__timeFilter(timestamp)\nORDER BY\n  time ASC;",
+          "rawSql": "SELECT\n  CONVERT_TZ(timestamp, '-03:00', '+00:00') AS time,\n  CASE\n    WHEN error_message LIKE '%Unable to connect to servers to test latency%' THEN 1\n    WHEN error_message LIKE '%[Errno -3] Temporary failure in name resolution%' THEN 2\n    WHEN error_message LIKE '%Could not submit results to speedtest.net%' THEN 3\n    WHEN error_message LIKE '%HTTP Error 403: Forbidden%' THEN 4\n    WHEN error_message LIKE '%The read operation timed out%' THEN 5\n    WHEN error_message LIKE '%urlopen error timed out%' THEN 6\n    WHEN error_message LIKE '%[Errno -2] Name or service not known%' THEN 7\n    WHEN error_message LIKE '%HTTP Error 503: Service Unavailable%' THEN 8\n    WHEN error_message LIKE '%HTTP Error 520%' THEN 9\n    WHEN error_message LIKE '%HTTP Error 429: Too Many Requests%' THEN 10\n    WHEN error_message LIKE '%[Errno 104] Connection reset by peer%' THEN 11\n    ELSE 12\n  END AS valor_erro,\n  CASE\n    WHEN error_message LIKE '%Unable to connect to servers to test latency%' THEN 'Unable to connect to servers to test latency'\n    WHEN error_message LIKE '%[Errno -3] Temporary failure in name resolution%' THEN '[Errno -3] Temporary failure in name resolution'\n    WHEN error_message LIKE '%Could not submit results to speedtest.net%' THEN 'Could not submit results to speedtest.net'\n    WHEN error_message LIKE '%HTTP Error 403: Forbidden%' THEN 'HTTP Error 403: Forbidden'\n    WHEN error_message LIKE '%The read operation timed out%' THEN 'The read operation timed out'\n    WHEN error_message LIKE '%urlopen error timed out%' THEN 'urlopen error timed out'\n    WHEN error_message LIKE '%[Errno -2] Name or service not known%' THEN '[Errno -2] Name or service not known'\n    WHEN error_message LIKE '%HTTP Error 503: Service Unavailable%' THEN 'HTTP Error 503: Service Unavailable'\n    WHEN error_message LIKE '%HTTP Error 520%' THEN 'HTTP Error 520'\n    WHEN error_message LIKE '%HTTP Error 429: Too Many Requests%' THEN 'HTTP Error 429: Too Many Requests'\n    WHEN error_message LIKE '%[Errno 104] Connection reset by peer%' THEN '[Errno 104] Connection reset by peer'\n    ELSE 'Erro Not Mapped'\n  END AS erros\nFROM\n  speedtest_grafana.speedtest_errors\nWHERE\n  $__timeFilter(timestamp)\nORDER BY\n  time ASC;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1705,11 +1722,11 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse painel mostra a lista de erros do dia atual na saída de erro (stderr) executado pelo SpeedTest a cada 5 minutos configurado na cron do servidor \"Proxmox\".",
       "gridPos": {
-        "h": 10,
+        "h": 9,
         "w": 11,
         "x": 13,
         "y": 42
@@ -1730,7 +1747,7 @@
           "dataset": "speedtest_grafana",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -1781,7 +1798,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 52
+        "y": 51
       },
       "id": 20,
       "panels": [],
@@ -1791,7 +1808,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse gráico mostrar a distância dos servidores onde o teste foi executado pelo SpeedTest a cada 5 minutos configurado na cron do servidor \"Proxmox\".",
       "fieldConfig": {
@@ -1842,7 +1859,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           }
@@ -1866,10 +1884,10 @@
         ]
       },
       "gridPos": {
-        "h": 9,
+        "h": 10,
         "w": 13,
         "x": 0,
-        "y": 53
+        "y": 52
       },
       "id": 5,
       "options": {
@@ -1895,7 +1913,7 @@
           "dataset": "speedtest_data",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -1936,7 +1954,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse painel mostra o nome do servidor e da cidade que fez os testes no dia atual.",
       "fieldConfig": {
@@ -1953,7 +1971,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1965,10 +1984,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 10,
         "w": 11,
         "x": 13,
-        "y": 53
+        "y": 52
       },
       "id": 21,
       "options": {
@@ -1996,7 +2015,7 @@
           "dataset": "speedtest_data",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -2037,7 +2056,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse painel mostra a quantidade de vezes que uma cidade fez o teste no dia atual.",
       "fieldConfig": {
@@ -2095,7 +2114,7 @@
           "dataset": "speedtest_data",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -2136,7 +2155,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "O painel mostra a lista da quantidade de testes por servidor realizados no dia atual, em ordem decrescente de testes.",
       "fieldConfig": {
@@ -2150,7 +2169,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2190,7 +2210,7 @@
           "dataset": "speedtest_grafana",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -2235,7 +2255,7 @@
           "dataset": "speedtest_grafana",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -2284,7 +2304,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "bdr77gpr4qv40b"
+        "uid": "P1CDD0E9A0382A773"
       },
       "description": "Esse painel mostra as cidade mais distantes em quilômetros onde foi feita o teste no dia atual.",
       "fieldConfig": {
@@ -2298,7 +2318,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           }
@@ -2334,7 +2355,7 @@
           "dataset": "speedtest_data",
           "datasource": {
             "type": "mysql",
-            "uid": "bdr77gpr4qv40b"
+            "uid": "P1CDD0E9A0382A773"
           },
           "editorMode": "code",
           "format": "table",
@@ -2380,13 +2401,13 @@
     "list": []
   },
   "time": {
-    "from": "now/d",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "America/Sao_Paulo",
   "title": "Internet - Elevalink - speedtest_grafana",
-  "uid": "fdr798gqysqo0c",
-  "version": 131,
+  "uid": "P1CDD0E9A0382A773",
+  "version": 5,
   "weekStart": "sunday"
 }
