@@ -1574,34 +1574,34 @@
                   "text": "Unable to connect to servers to test latency"
                 },
                 "2": {
-                  "color": "dark-orange",
-                  "index": 1,
-                  "text": "[Errno -3] Temporary failure in name resolution"
-                },
-                "3": {
-                  "color": "purple",
-                  "index": 2,
-                  "text": "Could not submit results to speedtest.net"
-                },
-                "4": {
                   "color": "yellow",
-                  "index": 3,
+                  "index": 1,
                   "text": "HTTP Error 403: Forbidden"
                 },
-                "5": {
+                "3": {
+                  "color": "super-light-purple",
+                  "index": 2,
+                  "text": "urlopen error [Errno -2] Name or service not known"
+                },
+                "4": {
                   "color": "red",
-                  "index": 4,
+                  "index": 3,
                   "text": "The read operation timed out"
                 },
+                "5": {
+                  "color": "dark-orange",
+                  "index": 4,
+                  "text": "urlopen error [Errno -3] Temporary failure in name resolution"
+                },
                 "6": {
-                  "color": "light-blue",
+                  "color": "purple",
                   "index": 5,
-                  "text": "urlopen error timed out"
+                  "text": "Could not submit results to speedtest.net"
                 },
                 "7": {
-                  "color": "super-light-purple",
+                  "color": "light-blue",
                   "index": 6,
-                  "text": "[Errno -2] Name or service not known"
+                  "text": "urlopen error timed out"
                 },
                 "8": {
                   "color": "semi-dark-blue",
@@ -1621,11 +1621,26 @@
                 "11": {
                   "color": "light-red",
                   "index": 10,
-                  "text": "[Errno 104] Connection reset by peer"
+                  "text": "urlopen error [Errno 104] Connection reset by peer"
                 },
                 "12": {
                   "color": "super-light-yellow",
                   "index": 11,
+                  "text": "HTTP Error 500: Internal Server Error"
+                },
+                "13": {
+                  "color": "semi-dark-blue",
+                  "index": 12,
+                  "text": "urlopen error _ssl.c:1012: The handshake operation timed out"
+                },
+                "14": {
+                  "color": "light-blue",
+                  "index": 13,
+                  "text": "Remote end closed connection without response"
+                },
+                "15": {
+                  "color": "dark-orange",
+                  "index": 14,
                   "text": "Erro Not Mapped"
                 }
               },
@@ -1679,7 +1694,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT\n  CONVERT_TZ(timestamp, '-03:00', '+00:00') AS time,\n  CASE\n    WHEN error_message LIKE '%Unable to connect to servers to test latency%' THEN 1\n    WHEN error_message LIKE '%[Errno -3] Temporary failure in name resolution%' THEN 2\n    WHEN error_message LIKE '%Could not submit results to speedtest.net%' THEN 3\n    WHEN error_message LIKE '%HTTP Error 403: Forbidden%' THEN 4\n    WHEN error_message LIKE '%The read operation timed out%' THEN 5\n    WHEN error_message LIKE '%urlopen error timed out%' THEN 6\n    WHEN error_message LIKE '%[Errno -2] Name or service not known%' THEN 7\n    WHEN error_message LIKE '%HTTP Error 503: Service Unavailable%' THEN 8\n    WHEN error_message LIKE '%HTTP Error 520%' THEN 9\n    WHEN error_message LIKE '%HTTP Error 429: Too Many Requests%' THEN 10\n    WHEN error_message LIKE '%[Errno 104] Connection reset by peer%' THEN 11\n    ELSE 12\n  END AS valor_erro,\n  CASE\n    WHEN error_message LIKE '%Unable to connect to servers to test latency%' THEN 'Unable to connect to servers to test latency'\n    WHEN error_message LIKE '%[Errno -3] Temporary failure in name resolution%' THEN '[Errno -3] Temporary failure in name resolution'\n    WHEN error_message LIKE '%Could not submit results to speedtest.net%' THEN 'Could not submit results to speedtest.net'\n    WHEN error_message LIKE '%HTTP Error 403: Forbidden%' THEN 'HTTP Error 403: Forbidden'\n    WHEN error_message LIKE '%The read operation timed out%' THEN 'The read operation timed out'\n    WHEN error_message LIKE '%urlopen error timed out%' THEN 'urlopen error timed out'\n    WHEN error_message LIKE '%[Errno -2] Name or service not known%' THEN '[Errno -2] Name or service not known'\n    WHEN error_message LIKE '%HTTP Error 503: Service Unavailable%' THEN 'HTTP Error 503: Service Unavailable'\n    WHEN error_message LIKE '%HTTP Error 520%' THEN 'HTTP Error 520'\n    WHEN error_message LIKE '%HTTP Error 429: Too Many Requests%' THEN 'HTTP Error 429: Too Many Requests'\n    WHEN error_message LIKE '%[Errno 104] Connection reset by peer%' THEN '[Errno 104] Connection reset by peer'\n    ELSE 'Erro Not Mapped'\n  END AS erros\nFROM\n  speedtest_grafana.speedtest_errors\nWHERE\n  $__timeFilter(timestamp)\nORDER BY\n  time ASC;",
+          "rawSql": "SELECT\n  CONVERT_TZ(timestamp, '-03:00', '+00:00') AS time,\n  CASE\n    WHEN error_message LIKE '%Unable to connect to servers to test latency%' THEN 1\n    WHEN error_message LIKE '%HTTP Error 403: Forbidden%' THEN 2\n    WHEN error_message LIKE '%urlopen error [Errno -2] Name or service not known%' THEN 3\n    WHEN error_message LIKE '%The read operation timed out%' THEN 4\n    WHEN error_message LIKE '%urlopen error [Errno -3] Temporary failure in name resolution%' THEN 5\n    WHEN error_message LIKE '%Could not submit results to speedtest.net%' THEN 6\n    WHEN error_message LIKE '%urlopen error timed out%' THEN 7\n    WHEN error_message LIKE '%HTTP Error 503: Service Unavailable%' THEN 8\n    WHEN error_message LIKE '%HTTP Error 520%' THEN 9\n    WHEN error_message LIKE '%HTTP Error 429: Too Many Requests%' THEN 10\n    WHEN error_message LIKE '%urlopen error [Errno 104] Connection reset by peer%' THEN 11\n    WHEN error_message LIKE '%HTTP Error 500: Internal Server Error%' THEN 12\n    WHEN error_message LIKE '%urlopen error _ssl.c:1012: The handshake operation timed out%' THEN 13\n    WHEN error_message LIKE '%Remote end closed connection without response%' THEN 14\n    ELSE 15\n  END AS valor_erro,\n  CASE\n    WHEN error_message LIKE '%Unable to connect to servers to test latency%' THEN 'Unable to connect to servers to test latency'\n    WHEN error_message LIKE '%HTTP Error 403: Forbidden%' THEN 'HTTP Error 403: Forbidden'\n    WHEN error_message LIKE '%urlopen error [Errno -2] Name or service not known%' THEN 'urlopen error [Errno -2] Name or service not known'\n    WHEN error_message LIKE '%The read operation timed out%' THEN 'The read operation timed out'\n    WHEN error_message LIKE '%urlopen error [Errno -3] Temporary failure in name resolution%' THEN 'urlopen error [Errno -3] Temporary failure in name resolution'\n    WHEN error_message LIKE '%Could not submit results to speedtest.net%' THEN 'Could not submit results to speedtest.net'\n    WHEN error_message LIKE '%urlopen error timed out%' THEN 'urlopen error timed out'\n    WHEN error_message LIKE '%HTTP Error 503: Service Unavailable%' THEN 'HTTP Error 503: Service Unavailable'\n    WHEN error_message LIKE '%HTTP Error 520%' THEN 'HTTP Error 520'\n    WHEN error_message LIKE '%HTTP Error 429: Too Many Requests%' THEN 'HTTP Error 429: Too Many Requests'\n    WHEN error_message LIKE '%urlopen error [Errno 104] Connection reset by peer%' THEN 'urlopen error [Errno 104] Connection reset by peer'\n    WHEN error_message LIKE '%HTTP Error 500: Internal Server Error%' THEN 'HTTP Error 500: Internal Server Error'\n    WHEN error_message LIKE '%urlopen error _ssl.c:1012: The handshake operation timed out%' THEN 'urlopen error _ssl.c:1012: The handshake operation timed out'\n    WHEN error_message LIKE '%Remote end closed connection without response%' THEN 'Remote end closed connection without response'\n    ELSE 'Erro Not Mapped'\n  END AS erros\nFROM\n  speedtest_grafana.speedtest_errors\nWHERE\n  $__timeFilter(timestamp)\nORDER BY\n  time ASC;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -2394,7 +2409,7 @@
       "type": "bargauge"
     }
   ],
-  "refresh": "1m",
+  "refresh": "",
   "schemaVersion": 39,
   "tags": [],
   "templating": {
@@ -2408,6 +2423,6 @@
   "timezone": "America/Sao_Paulo",
   "title": "Internet - Elevalink - speedtest_grafana",
   "uid": "P1CDD0E9A0382A773",
-  "version": 5,
+  "version": 6,
   "weekStart": "sunday"
 }
