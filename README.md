@@ -1,187 +1,201 @@
----
+<!---
 Projeto: shell-script-mon-speedtest
-Descrição: Este script Bash automatiza o teste de velocidade da conexão à internet usando o speedtest-cli
-           da Ookla. Ele instala o speedtest-cli do repositório do Debian para obter resultados dos testes.
-           Além disso, cria um banco de dados MariaDB (MySQL) para armazenar resultados bem-sucedidos e erros dos testes extraindo os dados com o comando sed.
-           Este script automatiza o teste de velocidade e a gestão de dados resultantes em um ambiente MariaDB (MySQL), adequado para monitoramento contínuo de conexões de internet.
+---
+Descrição: Este script Bash automatiza o teste de velocidade da conexão à internet
+utilizando o Speedtest CLI oficial da Ookla (binário distribuído pelo site da Speedtest). 
+A mudança em relação à versão anterior baseada no pacote speedtest-cli do repositório Debian 
+foi motivada por maior confiabilidade, consistência de métricas e redução de erros 
+intermitentes. Os resultados e falhas são coletados de forma robusta e armazenados em um 
+banco de dados MariaDB (MySQL), permitindo monitoramento contínuo via Grafana.
+---
 Autor: Glauber GF (@mcnd2)
 Data: 15/07/2024
----
+Atualizado: 28/12/2025
+--->
 
-# Script de Monitoramento de Teste de Velocidade com Speedtest
+# Script para Teste de Velocidade com Speedtest by Ookla e Monitoramento via Grafana.
 
-![Image](https://github.com/glaubergf/shell-script-mon-speedtest/blob/main/images/speedtest_results.png)
-![Image](https://github.com/glaubergf/shell-script-mon-speedtest/blob/main/images/speedtest1_grafana.png)
-![Image](https://github.com/glaubergf/shell-script-mon-speedtest/blob/main/images/speedtest2_grafana.png)
-![Image](https://github.com/glaubergf/shell-script-mon-speedtest/blob/main/images/speedtest3_grafana.png)
+![Image](https://github.com/glaubergf/shell-script-mon-speedtest/blob/main/images/speedtest_ookla_results.png)
+![Image](https://github.com/glaubergf/shell-script-mon-speedtest/blob/main/images/speedtest_ookla_grafana1.png)
+![Image](https://github.com/glaubergf/shell-script-mon-speedtest/blob/main/images/speedtest_ookla_grafana2.png)
 
-A Ookla **[Speedtest](https://www.speedtest.net/pt)** é uma maneira de testar o desempenho e 
-a qualidade de uma conexão de internet. O Speedtest CLI traz a tecnologia confiável e a rede de servidores 
-globais do Speedtest para a linha de comando. Voltado a desenvolvedores de software, administradores de sistema
-e aficionados por computação, o Speedtest CLI é o primeiro aplicativo Speedtest nativo para Linux oferecido 
-pela Ookla. 
+A **[Speedtest by Ookla](https://www.speedtest.net/pt)** é uma ferramenta amplamente reconhecida para medir o desempenho e a qualidade de conexões de internet. O **Speedtest CLI oficial da Ookla** é um aplicativo nativo para Linux, mantido pela própria Ookla, oferecendo maior fidelidade nos testes, métricas mais completas e melhor compatibilidade com a infraestrutura atual dos servidores Speedtest.
 
-Este projeto utiliza o comando **[sed](https://www.gnu.org/software/sed/manual/sed.html)** que é uma ferramenta poderosa de linha de comando em sistemas Unix e Linux, utilizada para manipulação de texto. O nome "sed" vem de "stream editor", ou seja, é um editor de fluxo de texto que processa texto linha por linha e permite fazer substituições, inserções, exclusões e outras operações de transformação de texto de forma automatizada. Com o comando sed vamos extrair os dados do log gerado pela execução do speedtest-cli, assim, salvando os dados em tabelas no banco de dados para posterior monitoramento no grafana.
+Este projeto foi originalmente baseado no **speedtest-cli** disponível nos repositórios do Debian. No entanto, após análises e testes práticos, o script foi migrado para utilizar o **Speedtest CLI oficial da Ookla**, obtido diretamente do site do fornecedor.
 
-## Etapas do script
+Além disso, o projeto utiliza ferramentas clássicas de shell como **awk**, **sed** e **grep** para extração robusta de métricas a partir do log do Speedtest, armazenando os dados em tabelas MariaDB para posterior visualização e análise no Grafana.
 
-* **Instalação do speedtest-cli**
-   - Verifica e instala o pacote _speedtest-cli_ se não estiver presente no sistema Debian.
+## Motivo da migração: speedtest-cli (Debian) → speedtest (Ookla)
 
-* **Configuração do Banco de Dados**
-   - Define variáveis de conexão e cria um novo usuário com privilégios no MariaDB (MySQL).
-   - Cria o banco de dados _speedtest_grafana_ e suas tabelas _speedtest_results_ e _speedtest_errors_.
+A troca não foi apenas estética ou de preferência, mas técnica e operacional.
 
-* **Execução do Speedtest e Registro de Dados**
-   - Executa o comando _speedtest-cli_ de forma segura, salvando resultados e erros em arquivos de log.
-   - Registra os resultados no banco de dados, incluindo informações como provedor, IP, servidor, cidade,
-   distância, ping, velocidades de download e upload, e URL do resultado.
+### Limitações do speedtest-cli (Debian)
 
-Lembre-se de já ter o MariaDB (MySQL) instalado e configurado o usuário root para a execução do script.
+- Projeto não oficial, mantido por terceiros.
+- Saída de texto inconsistente entre versões.
+- Erros recorrentes de execução em determinados horários (00 e 30 minutos).
+- Falhas frequentes como:
 
-## speedtest-cli (_Debian_) X speedtest (_Ookla_)
+  * `Unable to connect to servers to test latency`
+  * `HTTP Error 403: Forbidden`
 
-Abaixo segue informações das diferenças nas informações fornecidas pelo **speedtest-cli** (repositório Debian) e 
-pelo **speedtest** (repositório Ookla).
+- Dependência do campo `Hosted by`, que em diversos cenários não é retornado, causando:
 
-* **speedtest-cli (Debian)**
-    - Informações Fornecidas -> O ***speedtest-cli*** geralmente fornece informações básicas como velocidade de
-    download, velocidade de upload, latência (ping) e o servidor utilizado para o teste.
-    
-    - Informações Adicionais -> Em alguns casos, pode mostrar o IP do provedor de internet que está sendo usado 
-    para realizar o teste, assim como a distância aproximada até o servidor de teste. Essas informações podem
-    ser úteis para entender a geolocalização do teste e qual infraestrutura está sendo utilizada pela 
-    sua conexão.
+  * Execução travada
+  * Registro incorreto de erro
 
-            :~$ speedtest-cli --share
-            Retrieving speedtest.net configuration...
-            Testing from Elevalink Telecomunicacoes LTDA - ME (xx.xxx.xxx.xxx)...
-            Retrieving speedtest.net server list...
-            Selecting best server based on ping...
-            Hosted by PLANETY INTERNET (São Pedro da Aldeia) [93.11 km]: 10.212 ms
-            Testing download speed................................................................................
-            Download: 87.34 Mbit/s
-            Testing upload speed......................................................................................................
-            Upload: 94.27 Mbit/s
-            Share results: http://www.speedtest.net/result/0123456789.png
-            :~$ 
+- Métricas limitadas, sem informações detalhadas de jitter, packet loss e latência por fase.
 
-* **speedtest (Ookla)**
-    - Informações Fornecidas -> O ***speedtest*** da Ookla oferece uma interface mais detalhada que inclui velocidade 
-    de download, velocidade de upload, latência (ping), perda de pacotes e, às vezes, a localização
-    aproximada do servidor de teste.
+### Vantagens do Speedtest CLI oficial (Ookla)
 
-    - Diferenças -> Não é comum que o speedtest da Ookla forneça diretamente o IP do provedor ou a distância até 
-    o servidor de teste. Ele se concentra mais na qualidade da conexão medida através de métricas como
-    latência e perda de pacotes, além das velocidades de download e upload.
+- Ferramenta oficial mantida pela Ookla.
+- Formato de saída estável e previsível.
+- Métricas avançadas de qualidade de conexão:
 
-            :~$ speedtest
+  * Idle Latency
+  * Jitter (download e upload)
+  * Packet Loss
+  * Latência mínima, média e máxima
 
-               Speedtest by Ookla
+- Menor incidência de bloqueios e erros 403.
+- Melhor aderência a ambientes de monitoramento contínuo.
 
-                  Server: Westlink Tecnologia - São Gonçalo (id: 46733)
-                     ISP: Elevalink Telecomunicacoes LTDA - ME
-            Idle Latency:     1.99 ms   (jitter: 0.11ms, low: 1.88ms, high: 2.12ms)
-                Download:    92.05 Mbps (data used: 46.4 MB)                                                   
-                            145.20 ms   (jitter: 43.36ms, low: 1.79ms, high: 252.41ms)
-                  Upload:    91.97 Mbps (data used: 71.0 MB)                                                   
-                              5.43 ms   (jitter: 2.91ms, low: 2.25ms, high: 151.59ms)
-             Packet Loss:     0.0%
-              Result URL: https://www.speedtest.net/result/c/b39ca341-0f55-4328-99bb-134e8dfe3126
-            :~$ 
+## Exemplo de saída – Speedtest CLI (Ookla)
 
-* **Pontos chave**
+```bash
+$ speedtest 
 
-    - Informações de localização e provedor -> O ***speedtest-cli*** pode oferecer detalhes mais específicos 
-    sobre o local de realização do teste e o provedor de internet utilizado, o que pode ser útil para 
-    diagnósticos mais localizados.
+   Speedtest by Ookla
 
-    - Métricas de qualidade da conexão -> O ***speedtest*** da Ookla é reconhecido por suas métricas de qualidade
-     de conexão, como latência e perda de pacotes, que são fundamentais para entender a estabilidade e 
-     confiabilidade da sua internet.
+      Server: MegaOnda Telecom - São Gonçalo (id: 47921)
+         ISP: Elevalink Telecomunicacoes LTDA - ME
+Idle Latency:     6.95 ms   (jitter: 0.26ms, low: 6.70ms, high: 7.17ms)
+    Download:   365.28 Mbps (data used: 267.2 MB)                                                   
+                 23.97 ms   (jitter: 1.29ms, low: 7.42ms, high: 39.92ms)
+      Upload:   351.78 Mbps (data used: 565.7 MB)                                                   
+                 14.87 ms   (jitter: 2.43ms, low: 6.04ms, high: 230.09ms)
+ Packet Loss:     0.0%
+  Result URL: https://www.speedtest.net/result/c/f70ee69b-b848-4f7f-af34-8c5aa171d4c2
+```
 
-Portanto, a escolha entre o **speedtest-cli** do Debian e o **speedtest** da Ookla depende das suas necessidades específicas de informação. Se você precisa de detalhes como o IP do provedor ou a distância até o servidor de 
-teste, o speedtest-cli pode ser mais adequado. Se você está mais interessado na qualidade geral da conexão, 
-incluindo latência e perda de pacotes, o speedtest da Ookla pode ser a melhor opção.
+## Etapas (atualizadas)
 
-****
+### 1. Instalação do Speedtest CLI (Ookla)
 
-#### OBSERVAÇÃO
+- Remover dependência do pacote `speedtest-cli` do repositorio Debian.
 
-Quando a saída padrão do teste não encontra o "Hosted" ele fica congelado e gera "ERRO" na saida de 
-erro (stderr). Isso ocorre a cada 30 minutos, sempre no minuto 00 e 30. Não consegui identificar o 
-porque do erro, no entanto, acho que pode ser uma restrição do próprio servidor do speedtest para alta 
-demanda de requisições nesse período, mas que ainda não está confirmado.
+```bash
+sudo apt remove -y speedtest-cli
+```
 
-A saída padrão pausada sem encontrar o "Hosted":
+- Realizar download e instalação do binário oficial da Ookla.
 
-    Retrieving speedtest.net configuration...
-    Testing from Elevalink Telecomunicacoes LTDA - ME (xx.xxx.xxx.xxx)...
-    Retrieving speedtest.net server list...
-    Selecting best server based on ping...
+    * URL do [Speedtest CLI](https://www.speedtest.net/apps/cli)
+    8 No momento da escrita deste README, a versão mais recente é a [ookla-speedtest-1.2.0-linux-x86_64](https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-x86_64.tgz)
 
-Saída de erro (stderr):
+```bash
+wget https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-x86_64.tgz
+```
 
-    ERROR: Unable to connect to servers to test latency.
+- Descompacte o arquivo `.tgz` baixado.
 
-ou
+    * Este binário garante compatibilidade com sistemas Debian/Ubuntu modernos.
 
-    Cannot retrieve speedtest configuration
-    ERROR: HTTP Error 403: Forbidden
+```bash
+tar -xvzf ookla-speedtest-1.2.0-linux-x86_64.tgz
+```
 
-## CronJob
+- Mover para /usr/local/bin/ e dar permissão de execução.
 
-Um **[CronJob](https://sempreupdate.com.br/linux/tutoriais/o-que-e-um-cronjob-e-como-funciona/)** é uma funcionalidade amplamente utilizada em sistemas operacionais Unix-like, como o Linux, que permite agendar a execução automática de tarefas em determinados intervalos de tempo. Ele é particularmente útil para realizar tarefas repetitivas, agendadas e automáticas, sem a necessidade de uma intervenção humana direta.
+```bash
+sudo mv speedtest /usr/local/bin/
+```
 
-Com isso, configure o script para ser executado no seu cronjob em um intervalo de tempo
-de acordo com sua necessidade para coleta de dados do teste.
+```bash
+sudo install -m 0755 speedtest /usr/local/bin/speedtest
+```
 
-Para configurar o cronjob, execute o comando abaixo com privilégio de root:
+### 2. Configuração do Banco de Dados MariaDB (MySQL)
 
-`sudo crontab -l -u root`
+Requisitos para o script funcionar corretamente:
 
-Em seguida, adicione no final do arquivo a linha configurada para ser executado a cada 5 minutos.
+- MySQL/MariaDB instalado e em execução
 
-`*/5 * * * * /bin/bash /path/do/seu/projeto/speedtest.sh`
+    * Caso não tenha o MariaDB instalado, utilize o comando abaixo ou o script de instalação ```mariadb_install.sh``` disponível no repositório principal do projeto.
 
-Salve e feche a cron. Com isso execute o restart da cron para habilitar a mudança feita.
+```bash
+sudo apt install -y mariadb-server mariadb-client
+```
 
-`sudo service cron restart`
+- Com isso, o script realiza as seguintes ações:
+
+    * Define variáveis de conexão com o MariaDB (MySQL).
+    * Cria o banco de dados `speedtest_grafana`.
+    * Cria tabelas separadas para:
+
+        * Resultados bem-sucedidos (`speedtest_results`)
+        * Erros de execução (`speedtest_errors`)
+
+### 3. Execução do teste e coleta de dados
+
+O scriopt `ookla-speedtest.sh` implementa:
+
+- Execução controlada do comando `speedtest`.
+- Captura de stdout e stderr em arquivos de log distintos.
+- Extração robusta de métricas utilizando `awk` e `sed`, evitando dependência de strings frágeis.
+- Registro detalhado no banco de dados, incluindo:
+
+    * ISP
+    * Servidor
+    * Latência idle
+    * Jitter de download e upload
+    * Velocidades de download e upload
+    * Packet loss
+    * URL do resultado
+
+### 4. Tratamento de erros
+
+Com o resultado da tabela `speedtest_errors`, o script oferece via dashboard Grafana:
+
+- Detecção explícita de falhas de resolução DNS, socket e configuração.
+- Registro de erros mesmo quando não há mudança de estado (visibilidade operacional).
+- Evita travamentos do script em casos de falha parcial do Speedtest.
+
+![Image](https://github.com/glaubergf/shell-script-mon-speedtest/blob/main/images/speedtest_ookla_grafana7.png)
+
+### 5. CronJob
+
+Um **[CronJob](https://sempreupdate.com.br/linux/tutoriais/o-que-e-um-cronjob-e-como-funciona/)** permite a execução automática do script em intervalos definidos.
+
+- Exemplo para executar a cada 5 minutos:
+
+```bash
+*/5 * * * * /bin/bash /path/do/seu/projeto/ookla-speedtest.sh
+```
+
+- Reiniciar o crontab:
+
+```bash
+sudo service cron restart
+```
+
+## Observações importantes
+
+- O Speedtest CLI oficial reduz drasticamente erros intermitentes observados na versão do repositório do Debian.
+- Métricas de jitter e latência agora são coletadas de forma confiável.
+- O script foi projetado para uso contínuo em ambientes de monitoramento (24x7).
+- Recomenda-se execução em ambiente dedicado ou VM para evitar interferência de carga local.
 
 ## Licença
 
-**GNU General Public License** (_Licença Pública Geral GNU_), **GNU GPL** ou simplesmente **GPL**.
+**GNU General Public License v3.0**
 
-[GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)
+Este programa é um software livre: você pode redistribuí-lo e/ou modificá-lo sob os termos da GNU GPL conforme publicada pela Free Software Foundation, seja a versão 3 da Licença, ou qualquer versão posterior.
 
-------
+Este programa é distribuído na esperança de que seja útil, mas SEM QUALQUER GARANTIA; sem mesmo a garantia implícita de COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM DETERMINADO FIM.
+
+Consulte: [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html)
+
+---
 
 Copyright (c) 2024 Glauber GF (mcnd2)
-
-Este programa é um software livre: você pode redistribuí-lo e/ou modificar
-sob os termos da GNU General Public License conforme publicada por
-a Free Software Foundation, seja a versão 3 da Licença, ou
-(à sua escolha) qualquer versão posterior.
-
-Este programa é distribuído na esperança de ser útil,
-mas SEM QUALQUER GARANTIA; sem mesmo a garantia implícita de
-COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM DETERMINADO FIM. Veja o
-GNU General Public License para mais detalhes.
-
-Você deve ter recebido uma cópia da Licença Pública Geral GNU
-junto com este programa. Caso contrário, consulte <https://www.gnu.org/licenses/>.
-
-*
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>

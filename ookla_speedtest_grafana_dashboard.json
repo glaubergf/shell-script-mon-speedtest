@@ -1,0 +1,3666 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "P1CDD0E9A0382A773"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "O dashboard monitora o link de internet contratado do provedor Elevalink.",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 11,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PC25FA8835BF7CBDD"
+      },
+      "description": "Monitora o status do link de internet, se está UP ou DOWN.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "DOWN"
+                },
+                "1": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "UP"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 0,
+        "y": 0
+      },
+      "hideTimeOverride": false,
+      "id": 24,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^ICMP ping$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.1.0",
+      "targets": [
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PC25FA8835BF7CBDD"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "Link Internet"
+          },
+          "host": {
+            "filter": "link internet - Elevalink"
+          },
+          "item": {
+            "filter": "ICMP ping"
+          },
+          "itemTag": {
+            "filter": "component: network"
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        }
+      ],
+      "title": "LINK INTERNET :: STATUS",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "P1CDD0E9A0382A773"
+      },
+      "description": "Exibe o nome do provedor de acesso da internet contratada.",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#3893c7"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 19,
+        "x": 5,
+        "y": 0
+      },
+      "id": 10,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Home",
+          "url": "https://elevalink.com.br/index.html"
+        }
+      ],
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "/^provider$/",
+          "values": true
+        },
+        "showPercentChange": false,
+        "text": {
+          "valueSize": 50
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.1.0",
+      "targets": [
+        {
+          "dataset": "speedtest_grafana",
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT DISTINCT provider FROM speedtest_grafana.speedtest_results;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "PROVEDOR DE INTERNET :: ISP",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 19,
+      "panels": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Mostra a média diária da velocidade de Download, calculada a partir dos testes executados pelo Speedtest (Ookla) ao longo do dia no servidor Proxmox.\n\nEste indicador permite avaliar o _desempenho médio real da conexão_ e comparar com o valor contratado, identificando degradações persistentes ao longo do tempo.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 2,
+              "displayName": "velocidade média",
+              "mappings": [],
+              "max": 400,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red"
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 160
+                  },
+                  {
+                    "color": "green",
+                    "value": 320
+                  }
+                ]
+              },
+              "unit": "Mbits"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 6,
+            "x": 0,
+            "y": 4
+          },
+          "id": 15,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": true,
+            "showThresholdMarkers": true,
+            "sizing": "auto"
+          },
+          "pluginVersion": "11.1.0",
+          "targets": [
+            {
+              "dataset": "speedtest_data",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT \n    AVG(download_mbps) AS media_download\nFROM \n    speedtest_grafana.speedtest_ookla_results\nWHERE \n    timestamp >= CURDATE()\n    AND timestamp < CURDATE() + INTERVAL 1 DAY;",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "name": "AVG",
+                    "parameters": [
+                      {
+                        "name": "download",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "timestamp",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ]
+              },
+              "table": "speedtest_results"
+            }
+          ],
+          "title": "DOWNLOAD :: DIA ATUAL",
+          "transparent": true,
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Mostra a média diária da velocidade de Upload, calculada a partir dos testes executados pelo Speedtest (Ookla) ao longo do dia no servidor Proxmox.\n\nEste painel ajuda a identificar _limitações de envio_, impacto em aplicações interativas, backups, VPNs e serviços que dependem de tráfego de saída estável.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 2,
+              "displayName": "velocidade média",
+              "mappings": [],
+              "max": 400,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red"
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 160
+                  },
+                  {
+                    "color": "green",
+                    "value": 320
+                  }
+                ]
+              },
+              "unit": "Mbits"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 6,
+            "x": 6,
+            "y": 4
+          },
+          "id": 7,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": true,
+            "showThresholdMarkers": true,
+            "sizing": "auto"
+          },
+          "pluginVersion": "11.1.0",
+          "targets": [
+            {
+              "dataset": "speedtest_data",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT \n    AVG(upload_mbps) AS media_upload\nFROM \n    speedtest_grafana.speedtest_ookla_results\nWHERE \n    timestamp >= CURDATE()\n    AND timestamp < CURDATE() + INTERVAL 1 DAY;\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "name": "AVG",
+                    "parameters": [
+                      {
+                        "name": "download",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "timestamp",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ]
+              },
+              "table": "speedtest_results"
+            }
+          ],
+          "title": "UPLOAD :: DIA ATUAL",
+          "transparent": true,
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Mostra a média diária da Latência (Ping), obtida a partir dos testes executados pelo Speedtest (Ookla) ao longo do dia no servidor Proxmox.\n\nEste indicador reflete a _responsividade média da conexão_, sendo essencial para avaliar a qualidade percebida em jogos, VoIP, navegação e aplicações sensíveis a tempo.\n* Para jogos, o aconselhado é uma latência abaixo de 20 ms.\n* Para navegar normalmente na web, abaixo de 100 ms é um valor aceitável.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 2,
+              "displayName": "velocidade média",
+              "mappings": [],
+              "max": 200,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 20
+                  },
+                  {
+                    "color": "red",
+                    "value": 100
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 6,
+            "x": 12,
+            "y": 4
+          },
+          "id": 8,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": true,
+            "showThresholdMarkers": true,
+            "sizing": "auto"
+          },
+          "pluginVersion": "11.1.0",
+          "targets": [
+            {
+              "dataset": "speedtest_data",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT \n    AVG(latency_ms) AS media_ping\nFROM \n    speedtest_grafana.speedtest_ookla_results\nWHERE \n    timestamp >= CURDATE()\n    AND timestamp < CURDATE() + INTERVAL 1 DAY;\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "name": "AVG",
+                    "parameters": [
+                      {
+                        "name": "ping",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              },
+              "table": "speedtest_results"
+            }
+          ],
+          "title": "PING :: DIA ATUAL",
+          "transparent": true,
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Mostra a média diária da Perda de Pacotes, calculada a partir dos testes executados pelo Speedtest (Ookla) ao longo do dia no servidor Proxmox.\n\nEste painel permite identificar _instabilidade persistente da rede_, congestionamento ou falhas de infraestrutura que afetam diretamente a eficiência dos protocolos e a qualidade das aplicações.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 2,
+              "displayName": "porcentagem média",
+              "mappings": [],
+              "max": 5,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "light-yellow",
+                    "value": 1
+                  },
+                  {
+                    "color": "orange",
+                    "value": 2
+                  },
+                  {
+                    "color": "semi-dark-red",
+                    "value": 3
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 6,
+            "x": 18,
+            "y": 4
+          },
+          "id": 34,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": true,
+            "showThresholdMarkers": true,
+            "sizing": "auto",
+            "text": {}
+          },
+          "pluginVersion": "11.1.0",
+          "targets": [
+            {
+              "dataset": "speedtest_data",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT\n  AVG(packet_loss) AS media_perda_de_pacote\nFROM\n  speedtest_grafana.speedtest_ookla_results\nWHERE \n    timestamp >= CURDATE()\n    AND timestamp < CURDATE() + INTERVAL 1 DAY;\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "name": "AVG",
+                    "parameters": [
+                      {
+                        "name": "ping",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              },
+              "table": "speedtest_results"
+            }
+          ],
+          "title": "LOSS :: DIA ATUAL",
+          "transparent": true,
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Tabela com informações dos testes do dia atual, executado pelo Speedtest (Ookla) ao longo do dia no servidor Proxmox.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "left",
+                "cellOptions": {
+                  "type": "auto",
+                  "wrapText": false
+                },
+                "filterable": false,
+                "inspect": false
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "time"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "city"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "server"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "server_id"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 24,
+            "x": 0,
+            "y": 13
+          },
+          "id": 21,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "enablePagination": true,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": true,
+                "displayName": "time"
+              }
+            ]
+          },
+          "pluginVersion": "11.1.0",
+          "targets": [
+            {
+              "dataset": "speedtest_data",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT\n  CONVERT_TZ(timestamp, '-03:00', '+00:00') AS time,\n  city AS \"cidade\",\n  server AS \"servidor\",\n  server_id AS \"código do servidor\",\n  result_url AS \"url do resultado\"\nFROM\n  speedtest_grafana.speedtest_ookla_results\nWHERE\n  timestamp >= CURDATE()\n  AND timestamp < CURDATE() + INTERVAL 1 DAY\nORDER BY\n  time DESC;",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "name": "AVG",
+                    "parameters": [
+                      {
+                        "name": "ping",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              },
+              "table": "speedtest_results"
+            }
+          ],
+          "title": "DETALHE DO TESTE :: DIA ATUAL",
+          "transparent": true,
+          "type": "table"
+        }
+      ],
+      "title": "MÉDIA DIÁRIA",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 4
+      },
+      "id": 16,
+      "panels": [],
+      "title": "GRANULARIDADE",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "P1CDD0E9A0382A773"
+      },
+      "description": "Mostra o gráfico de linha (time series) do teste de Download executado pelo Speedtest (Ookla) a cada 5 minutos via cron no servidor Proxmox.\n\nA velocidade de download representa a _capacidade de recepção de dados_ da conexão e impacta diretamente a experiência de navegação, streaming, downloads de arquivos e consumo de conteúdo em geral.\n\n##### -> Este painel permite acompanhar\n* estabilidade do throughput ao longo do tempo\n* quedas recorrentes de desempenho\n* variações causadas por congestionamento ou limitação do provedor\n\n---\n\n##### -> Informação técnica\n* Download mede a _taxa máxima de transferência de dados recebidos_\n* É fortemente influenciado por: \ncongestionamento do ISP; \npolíticas de traffic shaping; \nsaturação do enlace em horários de pico\n\nTestes frequentes ajudam a identificar _padrões de degradação_\n\n---\n\n##### -> Referência regulatória (ANATEL)\n\n###### De acordo com a regulamentação da ANATEL:\n\n* A _velocidade média_ deve ser _igual ou superior a 80%_ do valor contratado\n* Resultados _persistentes abaixo de 40%_ do valor contratado, quando comprovados por múltiplas medições, caracterizam _não conformidade_ e permitem a abertura de chamado junto ao provedor\n\n---\n\n###### Observação em conjunto com outros indicadores\n\n* _Perda de pacotes_ → redução direta de throughput\n* _Latência elevada_ → impacto no ramp-up do TCP\n* _Jitter alto_ → instabilidade perceptível em downloads contínuos\n* _Upload saturado_ → degradação indireta do download (ACKs atrasados)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": 3600000,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": 600000,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "decimals": 2,
+          "displayName": "Download",
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red"
+              },
+              {
+                "color": "yellow",
+                "value": 160
+              },
+              {
+                "color": "green",
+                "value": 320
+              }
+            ]
+          },
+          "unit": "Mbits"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 18,
+        "x": 0,
+        "y": 5
+      },
+      "id": 25,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "timezone": [
+          "browser"
+        ],
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "dataset": "speedtest_data",
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\n  CONVERT_TZ(timestamp, '-03:00', '+00:00') AS time,\n  download_mbps\nFROM\n  speedtest_grafana.speedtest_ookla_results\nWHERE\n  $__timeFilter(timestamp)\nORDER BY\n  time;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [
+                  {
+                    "name": "download",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              {
+                "parameters": [
+                  {
+                    "name": "timestamp",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "speedtest_results"
+        }
+      ],
+      "title": "DOWNLOAD :: GRANULAR",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "P1CDD0E9A0382A773"
+      },
+      "description": "Mostra a média granular da velocidade de Download, calculada a partir dos testes executados pelo Speedtest (Ookla) a cada 5 minutos via cron no servidor Proxmox.\n\nEste painel do tipo Gauge fornece uma leitura imediata da capacidade efetiva de download no período selecionado, facilitando a comparação direta com o valor contratado e a avaliação de conformidade operacional.\n\n---\n\n##### -> Observações técnicas\n\n* Representa a _taxa média real de download\n* Variações frequentes indicam: \ncongestionamento; \nuso simultâneo intenso; \nlimitação do ISP\n\n---\n\n##### -> Referência operacional (exemplo)\n\n* |≥ 100% do contratado → Excelente\n* 80 – 100% → Normal\n* 40 – 80% → Atenção\n* |< 40% → Crítico",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "displayName": "velocidade média",
+          "mappings": [],
+          "max": 400,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red"
+              },
+              {
+                "color": "yellow",
+                "value": 160
+              },
+              {
+                "color": "green",
+                "value": 320
+              }
+            ]
+          },
+          "unit": "Mbits"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 6,
+        "x": 18,
+        "y": 5
+      },
+      "id": 6,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.1.0",
+      "targets": [
+        {
+          "dataset": "speedtest_data",
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\n  AVG(download_mbps) AS media_download\nFROM\n  speedtest_grafana.speedtest_ookla_results\nWHERE\n  $__timeFilter(timestamp);",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "download",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              {
+                "parameters": [
+                  {
+                    "name": "timestamp",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ]
+          },
+          "table": "speedtest_results"
+        }
+      ],
+      "title": "DOWNLOAD :: MÉDIA GRANULAR",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "P1CDD0E9A0382A773"
+      },
+      "description": "Mostra o gráfico de linha (time series) do teste de Upload executado pelo Speedtest (Ookla) a cada 5 minutos via cron no servidor Proxmox.\n\nA velocidade de upload representa a capacidade de envio de dados da conexão para a Internet e é fundamental para aplicações que dependem de interatividade, transmissão contínua e baixa latência.\n\n##### -> Este painel permite identificar\n* quedas recorrentes de taxa de envio\n* saturação do link de saída\n* impactos diretos em chamadas, VPNs e serviços expostos\n\n---\n\n##### → Informação técnica\n* Upload é geralmente _inferior ao download_\n* É diretamente afetado por: \nsaturação da rede local; \nbufferbloat; \npolíticas de traffic shaping do ISP\n* O valor contratado _deve constar no plano do provedor_\n\n---\n\n##### → Impacto prático de upload baixo ou instável\n* Chamadas de vídeo com atraso ou travamentos\n* Upload lento de arquivos e backups\n* VPNs instáveis\n* Serviços self-hosted com baixa responsividade\n\n---\n\n###### Observação em conjunto com outros indicadores\n* _Jitter de upload alto_ → envio irregular de pacotes\n* _Latência elevada durante upload_ → bufferbloat\n* _Perda de pacotes_ → queda de throughput efetivo\n\n\n",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": 3600000,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": 600000,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "decimals": 2,
+          "displayName": "Upload",
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red"
+              },
+              {
+                "color": "yellow",
+                "value": 160
+              },
+              {
+                "color": "green",
+                "value": 320
+              }
+            ]
+          },
+          "unit": "Mbits"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Upload"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 18,
+        "x": 0,
+        "y": 14
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "timezone": [
+          "browser"
+        ],
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "dataset": "speedtest_data",
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\n  CONVERT_TZ(timestamp, '-03:00', '+00:00') AS time,\n  upload_mbps\nFROM\n  speedtest_grafana.speedtest_ookla_results\nWHERE\n  $__timeFilter(timestamp)\nORDER BY\n  time;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [
+                  {
+                    "name": "download",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              {
+                "parameters": [
+                  {
+                    "name": "timestamp",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "speedtest_results"
+        }
+      ],
+      "title": "UPLOAD :: GRANULAR",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "P1CDD0E9A0382A773"
+      },
+      "description": "Mostra a média granular da velocidade de Upload, calculada a partir dos testes executados pelo Speedtest (Ookla) a cada 5 minutos via cron no servidor Proxmox.\n\nEste painel do tipo Gauge apresenta uma visão rápida da capacidade efetiva de envio da conexão no período selecionado, facilitando a validação do desempenho em relação ao valor contratado.\n\n---\n\n##### -> Observações técnicas\n\n* Representa a _taxa média real de upload_\n* Variações frequentes indicam: \ncongestionamento; \nuso simultâneo intenso; \nlimitação do ISP\n\n---\n\n##### -> Referência operacional (exemplo)\n\n* |≥ 100% do contratado → Excelente\n* 80 – 100% → Normal\n* 40 – 80% → Atenção\n* |< 40% → Crítico",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "displayName": "velocidade média",
+          "mappings": [],
+          "max": 400,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red"
+              },
+              {
+                "color": "yellow",
+                "value": 160
+              },
+              {
+                "color": "green",
+                "value": 320
+              }
+            ]
+          },
+          "unit": "Mbits"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 6,
+        "x": 18,
+        "y": 14
+      },
+      "id": 17,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.1.0",
+      "targets": [
+        {
+          "dataset": "speedtest_data",
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\n  AVG(upload_mbps) AS media_upload\nFROM\n  speedtest_grafana.speedtest_ookla_results\nWHERE\n  $__timeFilter(timestamp);",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "download",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              {
+                "parameters": [
+                  {
+                    "name": "timestamp",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ]
+          },
+          "table": "speedtest_results"
+        }
+      ],
+      "title": "UPLOAD :: MÉDIA GRANULAR",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "P1CDD0E9A0382A773"
+      },
+      "description": "Mostra o gráfico de linha (time series) do teste de Latência (Ping) executado pelo Speedtest (Ookla) a cada 5 minutos via cron no servidor Proxmox.\n\nA latência representa o _tempo de ida e volta (RTT)_ de um pacote entre o cliente e o servidor de teste, sendo um dos principais indicadores de _responsividade da rede_.\n\n##### -> Este painel permite identificar\n\n* degradações progressivas de resposta\n\n* picos pontuais de atraso\n\n* correlação direta com _jitter, perda de pacotes e congestionamento_\n\n---\n\n##### -> Informação técnica\n\n* Latência baixa indica _resposta rápida_\n\n* Latência elevada impacta: \njogos online; \nchamadas de voz e vídeo;\nVPNs e conexões interativas;\nnavegação Web (especialmente TLS e páginas dinâmicas)\n\n---\n\n##### -> Valores de referência (operacionais)\n\n* 0 – 20 ms → Excelente (jogos, VoIP)\n\n* 20 – 50 ms → Bom\n\n* 50 – 100 ms → Aceitável\n\n* |> 100 ms → Degradação perceptível\n\n* |> 200 ms → Impacto severo\n\n---\n\n###### Observação em conjunto com outros indicadores\n\n* _Jitter alto_ → latência instável\n\n* _Perda de pacotes_ → aumento artificial de RTT (TCP)\n\n* _Congestionamento_ → causa mais comum de picos de ping",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": 3600000,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": 3600000,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "decimals": 2,
+          "displayName": "Ping",
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "yellow",
+                "value": 20
+              },
+              {
+                "color": "red",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Ping"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 18,
+        "x": 0,
+        "y": 23
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "sortBy": "Name",
+          "sortDesc": false
+        },
+        "timezone": [
+          "browser"
+        ],
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "dataset": "speedtest_data",
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\n  CONVERT_TZ(timestamp, '-03:00', '+00:00') AS time,\n  latency_ms\nFROM\n  speedtest_grafana.speedtest_ookla_results\nWHERE\n  $__timeFilter(timestamp)\nORDER BY\n  time;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [
+                  {
+                    "name": "download",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              {
+                "parameters": [
+                  {
+                    "name": "timestamp",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "speedtest_results"
+        }
+      ],
+      "title": "PING :: GRANULAR",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "P1CDD0E9A0382A773"
+      },
+      "description": "Mostra a média granular da Latência (Ping) medida pelo Speedtest (Ookla), calculada a partir das execuções realizadas a cada 5 minutos via cron no servidor Proxmox.\n\nEste painel do tipo Gauge representa o estado atual de responsividade da conexão, permitindo uma avaliação rápida da qualidade do link no intervalo selecionado.\n\n##### -> É ideal para\n* monitoramento em tempo real\n* leitura rápida em dashboards NOC\n* comparação direta com limites aceitáveis de latência\n\n---\n\n##### -> Observações técnicas\n\n* Representa a latência média do período\n\n* Valores elevados indicam: \ncongestionamento; \nrotas longas ou instáveis; \nsaturação de uplink/downlink",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "displayName": "velocidade média",
+          "mappings": [],
+          "max": 150,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "#EAB839",
+                "value": 20
+              },
+              {
+                "color": "red",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 6,
+        "x": 18,
+        "y": 23
+      },
+      "id": 28,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "text": {}
+      },
+      "pluginVersion": "11.1.0",
+      "targets": [
+        {
+          "dataset": "speedtest_data",
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\n  AVG(latency_ms) AS media_ping\nFROM\n  speedtest_grafana.speedtest_ookla_results\nWHERE\n  $__timeFilter(timestamp);\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "ping",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "speedtest_results"
+        }
+      ],
+      "title": "PING :: MÉDIA GRANULAR",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "P1CDD0E9A0382A773"
+      },
+      "description": "Mostra o gráfico de linha (time series) da Perda de Pacotes (%) medida pelo Speedtest (Ookla), executado a cada 5 minutos via cron no servidor Proxmox.\n\n##### -> Informação\n\n* A _perda de pacotes ocorre_ quando pacotes IP não chegam ao destino, geralmente devido a _congestionamento_, _falhas físicas_ ou limitações de buffer_ em dispositivos de rede.\n\n* Esse fenômeno afeta diretamente a _eficiência dos protocolos de transporte_ e a _qualidade das aplicações_, especialmente as sensíveis a tempo real.\n\n---\n\n##### -> Onde os pacotes podem ser perdidos\n\n* Camada física: _Ruído, interferência eletromagnética, cabos ou conectores defeituosos_\n\n* Camada de enlace (Ethernet/Wi-Fi): _Colisões, retransmissões excessivas, erros de CRC_\n\n* Camada de rede (IP): _Descarte de pacotes por congestionamento (buffer overflow)_\n\n---\n\n##### -> Camada de transporte (UDP/TCP)\n\n* UDP: _Pacotes perdidos não são retransmitidos, resultando em degradação direta da aplicação_\n\n* TCP: _Pacotes perdidos causam retransmissão, redução da janela de congestionamento e aumento da latência, impactando o throughput_\n\n---\n\n##### -> Valores de referência (técnicos)\n\n* 0% → ideal\n\n* <| 0,1% → excelente (VoIP, streaming e aplicações em tempo real)\n\n* 0,1% – 1% → aceitável\n\n* |> 1% → degradação perceptível\n\n* |> 2–3% → impacto severo em aplicações sensíveis a tempo\n\n---\n\n###### Observação em relação com outros indicadores\n\n* _Jitter_ alto pode causar perda indireta (buffers estouram)\n\n* _Latência alta + perda de pacotes_ pode levar ao colapso do throughput TCP\n\n* Congestionamento é a causa mais comum em redes de ISPs\n\n\n",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds",
+            "seriesBy": "last"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "% Perda de Pacotes",
+            "axisPlacement": "left",
+            "axisSoftMax": 1,
+            "axisSoftMin": 0,
+            "barAlignment": -1,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": 3600000,
+            "lineInterpolation": "stepAfter",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": 3600000,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "decimals": 2,
+          "displayName": "Loss",
+          "fieldMinMax": true,
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "Ideal, excelente (VoIP e tempo real) - 0%"
+                },
+                "1": {
+                  "color": "yellow",
+                  "index": 1,
+                  "text": "Aceitável - 1,00%"
+                },
+                "2": {
+                  "color": "orange",
+                  "index": 2,
+                  "text": "Degradação perceptível - 2,00%"
+                },
+                "3": {
+                  "color": "red",
+                  "index": 3,
+                  "text": "Impacto severo em aplicações sensíveis a tempo - 3,00%"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "yellow",
+                "value": 1
+              },
+              {
+                "color": "dark-orange",
+                "value": 2
+              },
+              {
+                "color": "red",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "packet_loss"
+            },
+            "properties": []
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 18,
+        "x": 0,
+        "y": 32
+      },
+      "id": 32,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "timezone": [
+          "browser"
+        ],
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "dataset": "speedtest_data",
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\n  CONVERT_TZ(timestamp, '-03:00', '+00:00') AS time,\n  packet_loss\nFROM\n  speedtest_grafana.speedtest_ookla_results\nWHERE\n  $__timeFilter(timestamp)\nORDER BY\n  time;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [
+                  {
+                    "name": "download",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              {
+                "parameters": [
+                  {
+                    "name": "timestamp",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "speedtest_results"
+        }
+      ],
+      "title": "LOSS :: GRANULAR",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "P1CDD0E9A0382A773"
+      },
+      "description": "Mostra a média granular da Perda de Pacotes (%) medida pelo Speedtest (Ookla), calculada a partir das execuções realizadas a cada 5 minutos via cron no servidor Proxmox.\n\nEste painel do tipo Gauge representa o _estado atual da qualidade da rede_, facilitando a identificação imediata de _degradações_, _instabilidade_ ou _congestionamento_ no enlace.\n\nO valor exibido corresponde à _agregação média do intervalo selecionado_, sendo ideal para:\n\n* Avaliação rápida de saúde da conexão\n\n* Comparação visual com limites aceitáveis\n\n* Detecção de impactos em aplicações sensíveis a tempo real\n\n---\n\n##### -> Observações técnicas\n\n* _0%_ indica entrega íntegra de pacotes\n\n* Pequenas variações podem indicar _congestionamento transitório_\n\n* Valores elevados correlacionam-se diretamente com:\naumento de _jitter_; \ndegradação de _latência_; \nqueda de _throughput TCP_",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "displayName": "porcentagem média",
+          "mappings": [],
+          "max": 5,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "light-yellow",
+                "value": 1
+              },
+              {
+                "color": "orange",
+                "value": 2
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 6,
+        "x": 18,
+        "y": 32
+      },
+      "id": 33,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "text": {}
+      },
+      "pluginVersion": "11.1.0",
+      "targets": [
+        {
+          "dataset": "speedtest_data",
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\n  AVG(packet_loss) AS media_packet_loss\nFROM\n  speedtest_grafana.speedtest_ookla_results\nWHERE\n  $__timeFilter(timestamp);\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "ping",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "speedtest_results"
+        }
+      ],
+      "title": "LOSS :: MÉDIA GRANULAR",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 41
+      },
+      "id": 31,
+      "panels": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Mostra o gráfico de série temporal (time series) do jitter durante o teste de download, medido pelo Speedtest (Ookla) a cada 5 minutos via cron no servidor Proxmox.\n\n##### -> Informação\n\nJitter é a variação da latência entre pacotes recebidos.\nMesmo com boa velocidade de download, jitter elevado indica _entrega irregular dos pacotes_.\n\n---\n\n##### -> O que significa (Download)\n\nDurante a recepção de dados:\n\n* Streaming pode sofrer microtravamentos\n\n* Downloads não fluem de forma estável\n\n* Aplicações sensíveis a latência ficam inconsistentes\n\n###### Valores elevados normalmente indicam congestionamento, bufferbloat ou interferência na rota.\n\n---\n\n##### -> Classificação - Jitter Download\n\n###### Jitter Idle | Qualidade\n\n* 0–10 ms | Excelente \n\n* 10–20 ms | Bom\n\n* 20–30 ms | Médio\n\n* |>30 ms | Ruim\n\n###### Para streaming, jogos e navegação estável, o recomendado é _jitter abaixo de 20 ms_.\n",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "hue",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": 3600000,
+                "lineInterpolation": "smooth",
+                "lineWidth": 1,
+                "pointSize": 2,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": 600000,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "area"
+                }
+              },
+              "decimals": 2,
+              "displayName": "Jiter Download",
+              "fieldMinMax": false,
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 10
+                  },
+                  {
+                    "color": "dark-orange",
+                    "value": 20
+                  },
+                  {
+                    "color": "semi-dark-red",
+                    "value": 30
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Jiter Download"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 18,
+            "x": 0,
+            "y": 6
+          },
+          "id": 26,
+          "options": {
+            "legend": {
+              "calcs": [
+                "last"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true,
+              "sortBy": "Name",
+              "sortDesc": true
+            },
+            "timezone": [
+              "browser"
+            ],
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "dataset": "speedtest_data",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT\n  CONVERT_TZ(timestamp, '-03:00', '+00:00') AS time,\n  jitter_download_ms\nFROM\n  speedtest_grafana.speedtest_ookla_results\nWHERE\n  $__timeFilter(timestamp)\nORDER BY\n  time;",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [
+                      {
+                        "name": "download",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "timestamp",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              },
+              "table": "speedtest_results"
+            }
+          ],
+          "title": "JITTER DOWNLOAD :: GRANULAR",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Exibe a média granular do jitter durante os testes de download, calculada a partir das medições executadas pelo Speedtest (Ookla) a cada 5 minutos via cron no servidor Proxmox.\n\n---\n\nO valor apresentado representa a _estabilidade média da conexão durante o recebimento de dados_ no intervalo de tempo selecionado, permitindo identificar degradações persistentes associadas a _saturação de link, bufferbloat ou congestionamento no sentido de entrada_.\n\n###### Informação\n\nDurante o download, jitter elevado indica que os pacotes chegam em intervalos irregulares, afetando  _streaming, downloads contínuos e qualidade geral da experiência de navegação_.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 2,
+              "displayName": "velocidade média",
+              "mappings": [],
+              "max": 50,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "semi-dark-yellow",
+                    "value": 10
+                  },
+                  {
+                    "color": "orange",
+                    "value": 20
+                  },
+                  {
+                    "color": "red",
+                    "value": 30
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 6,
+            "x": 18,
+            "y": 6
+          },
+          "id": 29,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": true,
+            "showThresholdMarkers": true,
+            "sizing": "auto",
+            "text": {}
+          },
+          "pluginVersion": "11.1.0",
+          "targets": [
+            {
+              "dataset": "speedtest_data",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT\n  AVG(jitter_download_ms) AS media_jitter_download\nFROM\n  speedtest_grafana.speedtest_ookla_results\nWHERE\n  $__timeFilter(timestamp);\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "name": "AVG",
+                    "parameters": [
+                      {
+                        "name": "ping",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              },
+              "table": "speedtest_results"
+            }
+          ],
+          "title": "JITTER DOWNLOAD :: MÉDIA GRANULAR",
+          "transparent": true,
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Mostra o gráfico de série temporal (time series) do jitter durante o teste de upload, medido pelo Speedtest (Ookla) a cada 5 minutos via cron no servidor Proxmox.\n\n##### -> Informação\n\nJitter é a variação do tempo de resposta (latência) entre pacotes. A latência é _quanto tempo demora_; o jitter é _o quanto esse tempo oscila_. Mesmo com ping baixo, oscilações elevadas indicam instabilidade da conexão.\n\n---\n\n##### -> O que significa (Upload)\n\nEnquanto você envia dados:\n\n* Chamadas de voz e vídeo sofrem interrupções\n\n* Jogos online perdem sincronização\n\n* VPNs e conexões interativas ficam instáveis\n\n###### _Picos de jitter no upload indicam saturação da fila de saída ou bufferbloat_, causando instabilidade momentânea.\n---\n\n##### -> Classificação - Jitter Upload\n\n###### Jitter Idle | Qualidade\n\n* 0–10 ms | Excelente \n\n* 10–20 ms | Bom\n\n* 20–30 ms | Médio\n\n* |>30 ms | Ruim\n\n###### Para upload de arquivos grandes, VoIP, videochamadas, jogos online e VPN, o recomendado é jitter abaixo de 20 ms.\n",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "hue",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": 3600000,
+                "lineInterpolation": "smooth",
+                "lineWidth": 1,
+                "pointSize": 2,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": 600000,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "area"
+                }
+              },
+              "decimals": 2,
+              "displayName": "Jiter Upload",
+              "fieldMinMax": false,
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 10
+                  },
+                  {
+                    "color": "dark-orange",
+                    "value": 20
+                  },
+                  {
+                    "color": "semi-dark-red",
+                    "value": 30
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Jiter Upload"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 18,
+            "x": 0,
+            "y": 15
+          },
+          "id": 27,
+          "options": {
+            "legend": {
+              "calcs": [
+                "last"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true,
+              "sortBy": "Name",
+              "sortDesc": true
+            },
+            "timezone": [
+              "browser"
+            ],
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "dataset": "speedtest_data",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT\n  CONVERT_TZ(timestamp, '-03:00', '+00:00') AS time,\n  jitter_upload_ms\nFROM\n  speedtest_grafana.speedtest_ookla_results\nWHERE\n  $__timeFilter(timestamp)\nORDER BY\n  time;",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [
+                      {
+                        "name": "download",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "timestamp",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              },
+              "table": "speedtest_results"
+            }
+          ],
+          "title": "JITTER UPLOAD :: GRANULAR",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Exibe a média granular do jitter durante os testes de upload, calculada a partir das medições executadas pelo Speedtest (Ookla) a cada 5 minutos via cron no servidor Proxmox.\n\n---\n\nO valor apresentado representa a estabilidade média do upload no intervalo de tempo selecionado, sendo útil para identificar degradações persistentes que não aparecem em picos isolados.\n\n---\n\n###### Informação\n\nJitter é a variação da latência entre pacotes.\nA média granular suaviza oscilações pontuais, evidenciando _instabilidade contínua_, congestionamento recorrente ou bufferbloat no caminho de saída.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 2,
+              "displayName": "velocidade média",
+              "mappings": [],
+              "max": 50,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "light-yellow",
+                    "value": 10
+                  },
+                  {
+                    "color": "orange",
+                    "value": 20
+                  },
+                  {
+                    "color": "semi-dark-red",
+                    "value": 30
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 6,
+            "x": 18,
+            "y": 15
+          },
+          "id": 30,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": true,
+            "showThresholdMarkers": true,
+            "sizing": "auto",
+            "text": {}
+          },
+          "pluginVersion": "11.1.0",
+          "targets": [
+            {
+              "dataset": "speedtest_data",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT\n  AVG(jitter_upload_ms) AS media_jitter_upload\nFROM\n  speedtest_grafana.speedtest_ookla_results\nWHERE\n  $__timeFilter(timestamp);\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "name": "AVG",
+                    "parameters": [
+                      {
+                        "name": "ping",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              },
+              "table": "speedtest_results"
+            }
+          ],
+          "title": "JITTER UPPLOAD :: MÉDIA GRANULAR",
+          "transparent": true,
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Apresenta o gráfico de série temporal (time series) do jitter em estado ocioso (idle), medido pelo Speedtest (Ookla) a cada 5 minutos via cron no servidor Proxmox, representando a qualidade base do link sem tráfego pesado.\n\n##### -> Informação\n\nO _Jitter Idle_ mede a variação da latência _sem carga significativa na rede_, refletindo a qualidade intrínseca do link.\n\n---\n\n##### -> O que significa (Idle Latency)\n\n###### Idle Latency (jitter em repouso)\n\n* Rede sem tráfego intenso\n\n* Mede estabilidade pura do enlace\n\n* Ideal para avaliar qualidade para jogos e VoIP\n\n* Excelente indicador de rota e ISP\n\n---\n\n##### -> Classificação - Jitter Idle\n\n###### Jitter Idle | Qualidade\n\n* 0–1 ms | Excelente \n\n* 1–5 ms | Bom\n\n* 5–15 ms | Médio\n\n* |>15 ms | Ruim\n\n###### Para jogos competitivos e VoIP, o ideal é _jitter abaixo de 15 ms_.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "hue",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": 3600000,
+                "lineInterpolation": "smooth",
+                "lineWidth": 1,
+                "pointSize": 2,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": 600000,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "area"
+                }
+              },
+              "decimals": 2,
+              "displayName": "Jiter Idle Latency",
+              "fieldMinMax": false,
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 1
+                  },
+                  {
+                    "color": "dark-orange",
+                    "value": 5
+                  },
+                  {
+                    "color": "red",
+                    "value": 15
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Jiter Idle"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "light-orange",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Jiter Idle Latency"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "light-orange",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 18,
+            "x": 0,
+            "y": 24
+          },
+          "id": 2,
+          "options": {
+            "legend": {
+              "calcs": [
+                "last"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "timezone": [
+              "browser"
+            ],
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "dataset": "speedtest_data",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT\n  CONVERT_TZ(timestamp, '-03:00', '+00:00') AS time,\n  jitter_idle_ms\nFROM\n  speedtest_grafana.speedtest_ookla_results\nWHERE\n  $__timeFilter(timestamp)\nORDER BY\n  time;",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [
+                      {
+                        "name": "download",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "timestamp",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              },
+              "table": "speedtest_results"
+            }
+          ],
+          "title": "JITTER IDLE :: GRANULAR",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Exibe a média granular do jitter medido em estado ocioso (idle latency), calculada a partir das medições executadas pelo Speedtest (Ookla) a cada 5 minutos via cron no servidor Proxmox.\n\n---\n\nEsse valor representa a _qualidade pura do link_, sem influência de tráfego intenso, sendo um excelente indicador de _estabilidade estrutural da conexão, rota e peering do provedor_.\n\n###### Informação\n\nO jitter idle mede a variação de latência quando a rede está em repouso:\n\n* Sem tráfego pesado\n\n* Sem saturação do link\n\n* Ideal para avaliar _jogos online, VoIP e aplicações sensíveis à latência_",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 2,
+              "displayName": "velocidade média",
+              "mappings": [],
+              "max": 25,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "light-yellow",
+                    "value": 1
+                  },
+                  {
+                    "color": "orange",
+                    "value": 5
+                  },
+                  {
+                    "color": "semi-dark-red",
+                    "value": 15
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 6,
+            "x": 18,
+            "y": 24
+          },
+          "id": 18,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": true,
+            "showThresholdMarkers": true,
+            "sizing": "auto",
+            "text": {}
+          },
+          "pluginVersion": "11.1.0",
+          "targets": [
+            {
+              "dataset": "speedtest_data",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT\n  AVG(jitter_idle_ms) AS media_jitter_ping\nFROM\n  speedtest_grafana.speedtest_ookla_results\nWHERE\n  $__timeFilter(timestamp);\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "name": "AVG",
+                    "parameters": [
+                      {
+                        "name": "ping",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              },
+              "table": "speedtest_results"
+            }
+          ],
+          "title": "JITTER IDLE :: MÉDIA GRANULAR",
+          "transparent": true,
+          "type": "gauge"
+        }
+      ],
+      "title": "GRANULARIDADE JITTER",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 42
+      },
+      "id": 23,
+      "panels": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Exibe sempre o último erro encontrado de acordo com o range de tempo selecionado.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "fieldMinMax": false,
+              "mappings": [
+                {
+                  "options": {
+                    "^Error 100.*": {
+                      "index": 0,
+                      "text": "Error 100 – DNS host not found"
+                    },
+                    "^Error 150.*": {
+                      "index": 1,
+                      "text": "Error 150 – Socket initialization failure"
+                    },
+                    "^Error 300.*": {
+                      "index": 2,
+                      "text": "Error 300 – Timeout reached"
+                    },
+                    "^Error 400.*": {
+                      "index": 3,
+                      "text": "Error 400 – Configuration retrieval failure"
+                    },
+                    "^Error 500.*": {
+                      "index": 5,
+                      "text": "Error 500 – Execution failure"
+                    },
+                    "^Error 999.*": {
+                      "index": 6,
+                      "text": "Error 999 – Unknown"
+                    }
+                  },
+                  "type": "value"
+                },
+                {
+                  "options": {
+                    "pattern": "^Error 410.*",
+                    "result": {
+                      "index": 4,
+                      "text": "Error 410 – No servers defined"
+                    }
+                  },
+                  "type": "regex"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "transparent"
+                  },
+                  {
+                    "color": "dark-red",
+                    "value": 100
+                  },
+                  {
+                    "color": "red",
+                    "value": 150
+                  },
+                  {
+                    "color": "dark-orange",
+                    "value": 200
+                  },
+                  {
+                    "color": "dark-yellow",
+                    "value": 400
+                  },
+                  {
+                    "color": "#e1b66f",
+                    "value": 410
+                  },
+                  {
+                    "color": "dark-blue",
+                    "value": 500
+                  },
+                  {
+                    "color": "purple",
+                    "value": 999
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 9,
+            "x": 0,
+            "y": 7
+          },
+          "id": 40,
+          "options": {
+            "colorMode": "background_solid",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": true
+            },
+            "showPercentChange": false,
+            "text": {
+              "titleSize": 30,
+              "valueSize": 30
+            },
+            "textMode": "value_and_name",
+            "wideLayout": true
+          },
+          "pluginVersion": "11.1.0",
+          "targets": [
+            {
+              "dataset": "performance_schema",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "/* =====================================================================\n    ÚLTIMO ERRO RAIZ NO RANGE DE TEMPO (ALINHADO AO PAINEL DE ERROS MAPEADOS)\n===================================================================== */\n\nWITH erros_split AS (\n\n  SELECT\n    e.timestamp AS execution_ts,\n    e.error_message AS raw_error_message,\n\n    TRIM(\n      REGEXP_REPLACE(\n        linha,\n        '\\\\[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9:.]+\\\\]',\n        ''\n      )\n    ) AS erro_linha\n\n  FROM speedtest_grafana.speedtest_ookla_errors e\n  JOIN JSON_TABLE(\n    CONCAT(\n      '[\"',\n      REPLACE(REPLACE(e.error_message, '\\r', ''), '\\n', '\",\"'),\n      '\"]'\n    ),\n    '$[*]' COLUMNS (linha TEXT PATH '$')\n  ) jt\n),\n\nerros_classificados AS (\n\n  SELECT\n    execution_ts,\n    raw_error_message,\n    erro_linha,\n\n    CASE\n      WHEN erro_linha LIKE '%non-initialized socket%' THEN 1\n      WHEN erro_linha LIKE '%resolve host name%' THEN 2\n      WHEN erro_linha LIKE '%Timeout%' THEN 3\n      WHEN erro_linha LIKE '%Latency test failed%' THEN 4\n      WHEN erro_linha LIKE '%Cannot retrieve configuration%' THEN 5\n      WHEN erro_linha LIKE '%No servers defined%' THEN 6\n      ELSE 99\n    END AS raiz_score,\n\n    CASE\n      WHEN erro_linha LIKE '%non-initialized socket%' THEN 'SOCKET'\n      WHEN erro_linha LIKE '%resolve host name%' THEN 'DNS'\n      WHEN erro_linha LIKE '%Timeout%' THEN 'TIMEOUT'\n      WHEN erro_linha LIKE '%Latency test failed%' THEN 'EXECUTION'\n      WHEN erro_linha LIKE '%Cannot retrieve configuration%' THEN 'CONFIGURATION'\n      WHEN erro_linha LIKE '%No servers defined%' THEN 'CONFIGURATION SERVER'\n      ELSE 'UNKNOWN'\n    END AS root_cause_group\n\n  FROM erros_split\n),\n\nexecucao_contexto AS (\n\n  SELECT\n    execution_ts,\n    raw_error_message,\n    MAX(root_cause_group = 'SOCKET') AS has_socket\n  FROM erros_classificados\n  GROUP BY\n    execution_ts,\n    raw_error_message\n),\n\nerro_raiz_execucao AS (\n\n  SELECT\n    e.execution_ts,\n    e.raw_error_message,\n\n    CASE\n      WHEN c.has_socket = 1\n           AND e.root_cause_group = 'DNS'\n      THEN CONCAT(e.erro_linha, ' by socket')\n      ELSE e.erro_linha\n    END AS root_error_message,\n\n    CASE\n      WHEN c.has_socket = 1\n           AND e.root_cause_group = 'DNS'\n      THEN 90\n      ELSE e.raiz_score\n    END AS raiz_score,\n\n    e.root_cause_group\n\n  FROM erros_classificados e\n  JOIN execucao_contexto c\n    ON c.execution_ts = e.execution_ts\n   AND c.raw_error_message = e.raw_error_message\n),\n\nerro_raiz_final AS (\n\n  SELECT\n    execution_ts,\n\n    SUBSTRING_INDEX(\n      GROUP_CONCAT(root_error_message ORDER BY raiz_score),\n      ',',\n      1\n    ) AS root_error_message,\n\n    MIN(raiz_score) AS raiz_score,\n\n    SUBSTRING_INDEX(\n      GROUP_CONCAT(root_cause_group ORDER BY raiz_score),\n      ',',\n      1\n    ) AS root_cause_group\n\n  FROM erro_raiz_execucao\n  GROUP BY\n    execution_ts\n)\n\n-- ====================================================================\n-- SAÍDA FINAL\n-- ====================================================================\nSELECT\n  CASE root_cause_group\n    WHEN 'DNS'           THEN 100\n    WHEN 'SOCKET'        THEN 150\n    WHEN 'TIMEOUT'       THEN 200\n    WHEN 'CONFIGURATION' THEN 400\n    WHEN 'CONFIGURATION SERVER' THEN 410\n    WHEN 'EXECUTION'     THEN 500\n    ELSE 999\n  END AS error_code,\n\n  CASE root_cause_group\n    WHEN 'DNS'           THEN 'DNS resolution failure'\n    WHEN 'SOCKET'        THEN 'Socket initialization failure'\n    WHEN 'TIMEOUT'       THEN 'Timeout reached'\n    WHEN 'CONFIGURATION' THEN 'Configuration retrieval failure'\n    WHEN 'EXECUTION'     THEN 'Execution failure'\n    WHEN 'CONFIGURATION SERVER' THEN 'No servers defined'\n    ELSE 'Unknown error'\n  END AS error_description\n\nFROM erro_raiz_final\nWHERE\n  root_cause_group <> 'UNKNOWN'\n  AND $__timeFilter(execution_ts)\n\nORDER BY execution_ts DESC\nLIMIT 1;\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              }
+            }
+          ],
+          "title": "ÚLTIMO ERRO :: GRANULAR",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Exibe a lista de erros raiz identificados nas execuções do Speedtest (Ookla) realizadas no dia atual, agendadas a cada 5 minutos via cron no servidor Proxmox.\n\n---\n\n* Apenas registros com erro válido são considerados (valores NULL são descartados);\n\n* Cada linha representa uma execução individual do teste, baseada no timestamp original da execução;\n\n* O erro exibido corresponde ao erro raiz da execução, determinado por prioridade causal;\n\n* O painel apresenta o código do erro, a descrição padronizada, o grupo funcional e o nível de criticidade, todos derivados do log bruto;\n\n* Os horários são exibidos no fuso UTC-3, mantendo a consistência com o ambiente de execução.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto",
+                  "wrapText": false
+                },
+                "filterable": false,
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "first_occurrence"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "error_code"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "error_description"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "error_group"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "severity"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 15,
+            "x": 9,
+            "y": 7
+          },
+          "id": 35,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "enablePagination": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": true,
+                "displayName": "first_occurrence"
+              }
+            ]
+          },
+          "pluginVersion": "11.1.0",
+          "targets": [
+            {
+              "dataset": "speedtest_grafana",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "/* =====================================================================\n   ETAPA 1 — QUEBRA DO LOG EM LINHAS INDIVIDUAIS\n===================================================================== */\nWITH erros_split AS (\n\n  SELECT\n    e.timestamp AS execution_ts,\n\n    TRIM(\n      REGEXP_REPLACE(\n        jt.linha,\n        '\\\\[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9:.]+\\\\]',\n        ''\n      )\n    ) AS erro_linha\n\n  FROM speedtest_grafana.speedtest_ookla_errors e\n  JOIN JSON_TABLE(\n    CONCAT(\n      '[\"',\n      REPLACE(REPLACE(e.error_message, '\\r', ''), '\\n', '\",\"'),\n      '\"]'\n    ),\n    '$[*]' COLUMNS (linha TEXT PATH '$')\n  ) jt\n\n  WHERE\n    e.error_message IS NOT NULL\n    AND e.error_message <> ''\n    AND e.timestamp >= CURDATE()\n    AND e.timestamp < CURDATE() + INTERVAL 1 DAY\n),\n\n/* =====================================================================\n   ETAPA 2 — CLASSIFICAÇÃO CAUSAL (CANÔNICA)\n===================================================================== */\nerros_classificados AS (\n\n  SELECT\n    execution_ts,\n    erro_linha,\n\n    /* ---------- RAIZ SCORE (MENOR = MAIS RAIZ) ---------- */\n    CASE\n      WHEN erro_linha LIKE '%non-initialized socket%' THEN 1\n      WHEN erro_linha LIKE '%resolve host name%' THEN 2\n      WHEN erro_linha LIKE '%Timeout%' THEN 3\n      WHEN erro_linha LIKE '%Latency test failed%' THEN 4\n      WHEN erro_linha LIKE '%Cannot retrieve configuration%' THEN 5\n      WHEN erro_linha LIKE '%No servers defined%' THEN 6\n      ELSE 99\n    END AS raiz_score,\n\n    /* ---------- ROOT CAUSE GROUP ---------- */\n    CASE\n      WHEN erro_linha LIKE '%non-initialized socket%' THEN 'SOCKET'\n      WHEN erro_linha LIKE '%resolve host name%' THEN 'DNS'\n      WHEN erro_linha LIKE '%Timeout%' THEN 'TIMEOUT'\n      WHEN erro_linha LIKE '%Latency test failed%' THEN 'EXECUTION'\n      WHEN erro_linha LIKE '%Cannot retrieve configuration%' THEN 'CONFIGURATION'\n      WHEN erro_linha LIKE '%No servers defined%' THEN 'CONFIGURATION SERVERS'\n      ELSE 'UNKNOWN'\n    END AS root_cause_group\n\n  FROM erros_split\n),\n\n/* =====================================================================\n   ETAPA 3 — CONTEXTO DA EXECUÇÃO\n   (DNS vira secundário se SOCKET existir)\n===================================================================== */\nexecucao_contexto AS (\n\n  SELECT\n    execution_ts,\n    MAX(root_cause_group = 'SOCKET') AS has_socket\n  FROM erros_classificados\n  GROUP BY execution_ts\n),\n\nerro_raiz_execucao AS (\n\n  SELECT\n    e.execution_ts,\n\n    CASE\n      WHEN c.has_socket = 1\n           AND e.root_cause_group = 'DNS'\n      THEN 90\n      ELSE e.raiz_score\n    END AS raiz_score,\n\n    e.root_cause_group\n\n  FROM erros_classificados e\n  JOIN execucao_contexto c\n    ON c.execution_ts = e.execution_ts\n),\n\n/* =====================================================================\n   ETAPA 4 — ERRO RAIZ FINAL POR EXECUÇÃO\n===================================================================== */\nerro_raiz_final AS (\n\n  SELECT\n    execution_ts,\n\n    SUBSTRING_INDEX(\n      GROUP_CONCAT(root_cause_group ORDER BY raiz_score),\n      ',',\n      1\n    ) AS root_cause_group,\n\n    MIN(raiz_score) AS raiz_score\n\n  FROM erro_raiz_execucao\n  GROUP BY execution_ts\n)\n\n-- ====================================================================\n-- SAÍDA FINAL — PAINEL TABLE (DIA ATUAL)\n-- ====================================================================\nSELECT\n  CONVERT_TZ(execution_ts, '-03:00', '+00:00') AS first_occurrence,\n\n  /* ---------- ERROR CODE ---------- */\n  CASE root_cause_group\n    WHEN 'DNS'           THEN 100\n    WHEN 'SOCKET'        THEN 150\n    WHEN 'TIMEOUT'       THEN 200\n    WHEN 'CONFIGURATION' THEN 400\n    WHEN 'CONFIGURATION SERVER' THEN 410\n    WHEN 'EXECUTION'     THEN 500\n    ELSE 999\n  END AS error_code,\n\n  /* ---------- DESCRIPTION ---------- */\n  CASE root_cause_group\n    WHEN 'DNS'           THEN 'DNS resolution failure'\n    WHEN 'SOCKET'        THEN 'Socket initialization failure'\n    WHEN 'TIMEOUT'       THEN 'Timeout reached'\n    WHEN 'CONFIGURATION' THEN 'Configuration retrieval failure'\n    WHEN 'EXECUTION'     THEN 'Execution failure'\n    WHEN 'CONFIGURATION' THEN 'No servers defined'\n    ELSE 'Unknown error'\n  END AS error_description,\n\n  /* ---------- ERROR GROUP ---------- */\n  CASE root_cause_group\n    WHEN 'DNS'           THEN 'NETWORK'\n    WHEN 'TIMEOUT'       THEN 'NETWORK'\n    WHEN 'SOCKET'        THEN 'SYSTEM'\n    WHEN 'CONFIGURATION' THEN 'APPLICATION'\n    WHEN 'CONFIGURATION SERVER' THEN 'APPLICATION'\n    WHEN 'EXECUTION'     THEN 'APPLICATION'\n    ELSE 'UNMAPPED'\n  END AS error_group,\n\n  /* ---------- SEVERITY ---------- */\n  CASE\n    WHEN raiz_score = 1 THEN 'CRITICAL'\n    WHEN raiz_score IN (2,3) THEN 'HIGH'\n    WHEN raiz_score = 4 THEN 'LOW'\n    WHEN raiz_score IN (5,6) THEN 'MEDIUM'\n    ELSE 'ANALYSIS'\n  END AS severity\n\nFROM erro_raiz_final\nWHERE root_cause_group <> 'UNKNOWN'\nORDER BY first_occurrence ASC;\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [
+                      {
+                        "name": "erro",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "timestamp",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              },
+              "table": "speedtest_results"
+            }
+          ],
+          "title": "ERRO RAIZ MAPEADO :: DIA ATUAL",
+          "transparent": true,
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Exibe uma série temporal dos erros detectados durante a execução do Speedtest (Ookla), executado a cada 5 minutos via cron no servidor Proxmox. O gráfico apresenta o código e a descrição do erro, permitindo identificar quando cada tipo de falha ocorreu ao longo do tempo.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "fillOpacity": 70,
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineWidth": 2,
+                "spanNulls": false
+              },
+              "displayName": "Error",
+              "fieldMinMax": false,
+              "mappings": [
+                {
+                  "options": {
+                    "pattern": "^Error 100.*",
+                    "result": {
+                      "color": "dark-red",
+                      "index": 0
+                    }
+                  },
+                  "type": "regex"
+                },
+                {
+                  "options": {
+                    "pattern": "^Error 150.*",
+                    "result": {
+                      "color": "red",
+                      "index": 1
+                    }
+                  },
+                  "type": "regex"
+                },
+                {
+                  "options": {
+                    "pattern": "^Error 200.*",
+                    "result": {
+                      "color": "dark-orange",
+                      "index": 2
+                    }
+                  },
+                  "type": "regex"
+                },
+                {
+                  "options": {
+                    "pattern": "^Error 400.*",
+                    "result": {
+                      "color": "dark-yellow",
+                      "index": 3
+                    }
+                  },
+                  "type": "regex"
+                },
+                {
+                  "options": {
+                    "pattern": "^Error 410.*",
+                    "result": {
+                      "color": "#e1b66f",
+                      "index": 4
+                    }
+                  },
+                  "type": "regex"
+                },
+                {
+                  "options": {
+                    "pattern": "^Error 500.*",
+                    "result": {
+                      "color": "dark-blue",
+                      "index": 5
+                    }
+                  },
+                  "type": "regex"
+                },
+                {
+                  "options": {
+                    "pattern": "^Error 999.*",
+                    "result": {
+                      "color": "dark-purple",
+                      "index": 6
+                    }
+                  },
+                  "type": "regex"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 24,
+            "x": 0,
+            "y": 12
+          },
+          "id": 39,
+          "options": {
+            "alignValue": "left",
+            "legend": {
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "mergeValues": true,
+            "rowHeight": 0.3,
+            "showValue": "always",
+            "tooltip": {
+              "mode": "multi",
+              "sort": "asc"
+            }
+          },
+          "targets": [
+            {
+              "dataset": "performance_schema",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "/* =====================================================================\n   TIME SERIES — ERRO RAIZ (ALINHADO AO PAINEL DE ERROS MAPEADOS)\n===================================================================== */\n\nWITH erros_split AS (\n\n  SELECT\n    e.timestamp AS execution_ts,\n    e.error_message AS raw_error_message,\n\n    TRIM(\n      REGEXP_REPLACE(\n        linha,\n        '\\\\[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9:.]+\\\\]',\n        ''\n      )\n    ) AS erro_linha\n\n  FROM speedtest_grafana.speedtest_ookla_errors e\n  JOIN JSON_TABLE(\n    CONCAT(\n      '[\"',\n      REPLACE(REPLACE(e.error_message, '\\r', ''), '\\n', '\",\"'),\n      '\"]'\n    ),\n    '$[*]' COLUMNS (linha TEXT PATH '$')\n  ) jt\n),\n\nerros_classificados AS (\n\n  SELECT\n    execution_ts,\n    raw_error_message,\n    erro_linha,\n\n    CASE\n      WHEN erro_linha LIKE '%non-initialized socket%' THEN 1\n      WHEN erro_linha LIKE '%resolve host name%' THEN 2\n      WHEN erro_linha LIKE '%Timeout%' THEN 3\n      WHEN erro_linha LIKE '%Latency test failed%' THEN 4\n      WHEN erro_linha LIKE '%Cannot retrieve configuration%' THEN 5\n      WHEN erro_linha LIKE '%No servers defined%' THEN 6\n      ELSE 99\n    END AS raiz_score,\n\n    CASE\n      WHEN erro_linha LIKE '%non-initialized socket%' THEN 'SOCKET'\n      WHEN erro_linha LIKE '%resolve host name%' THEN 'DNS'\n      WHEN erro_linha LIKE '%Timeout%' THEN 'TIMEOUT'\n      WHEN erro_linha LIKE '%Latency test failed%' THEN 'EXECUTION'\n      WHEN erro_linha LIKE '%Cannot retrieve configuration%' THEN 'CONFIGURATION'\n      WHEN erro_linha LIKE '%No servers defined%' THEN 'CONFIGURATION SERVER'\n      ELSE 'UNKNOWN'\n    END AS root_cause_group\n\n  FROM erros_split\n),\n\nexecucao_contexto AS (\n\n  SELECT\n    execution_ts,\n    raw_error_message,\n    MAX(root_cause_group = 'SOCKET') AS has_socket\n  FROM erros_classificados\n  GROUP BY\n    execution_ts,\n    raw_error_message\n),\n\nerro_raiz_execucao AS (\n\n  SELECT\n    e.execution_ts,\n    e.raw_error_message,\n\n    CASE\n      WHEN c.has_socket = 1\n           AND e.root_cause_group = 'DNS'\n      THEN CONCAT(e.erro_linha, ' by socket')\n      ELSE e.erro_linha\n    END AS root_error_message,\n\n    CASE\n      WHEN c.has_socket = 1\n           AND e.root_cause_group = 'DNS'\n      THEN 90\n      ELSE e.raiz_score\n    END AS raiz_score,\n\n    e.root_cause_group\n\n  FROM erros_classificados e\n  JOIN execucao_contexto c\n    ON c.execution_ts = e.execution_ts\n   AND c.raw_error_message = e.raw_error_message\n),\n\nerro_raiz_final AS (\n\n  SELECT\n    execution_ts,\n    raw_error_message,\n\n    SUBSTRING_INDEX(\n      GROUP_CONCAT(root_error_message ORDER BY raiz_score),\n      ',',\n      1\n    ) AS root_error_message,\n\n    MIN(raiz_score) AS raiz_score,\n\n    SUBSTRING_INDEX(\n      GROUP_CONCAT(root_cause_group ORDER BY raiz_score),\n      ',',\n      1\n    ) AS root_cause_group\n\n  FROM erro_raiz_execucao\n  GROUP BY\n    execution_ts,\n    raw_error_message\n)\n\n-- ====================================================================\n-- SAÍDA TIME SERIES\n-- ====================================================================\nSELECT\n  CONVERT_TZ(execution_ts, '-03:00', '+00:00') AS time,\n\n  DATE_ADD(\n    CONVERT_TZ(execution_ts, '-03:00', '+00:00'),\n    INTERVAL 30 SECOND\n  ) AS end_time,\n\n  CONCAT(\n    'Error ',\n    CASE root_cause_group\n      WHEN 'DNS'           THEN 100\n      WHEN 'SOCKET'        THEN 150\n      WHEN 'TIMEOUT'       THEN 200\n      WHEN 'CONFIGURATION' THEN 400\n      WHEN 'CONFIGURATION SERVER' THEN 410\n      WHEN 'EXECUTION'     THEN 500\n      ELSE 999\n    END,\n    ' - ',\n    CASE root_cause_group\n      WHEN 'DNS'           THEN 'DNS resolution failure'\n      WHEN 'SOCKET'        THEN 'Socket initialization failure'\n      WHEN 'TIMEOUT'       THEN 'Timeout reached'\n      WHEN 'CONFIGURATION' THEN 'Configuration retrieval failure'\n      WHEN 'EXECUTION'     THEN 'Execution failure'\n      WHEN 'CONFIGURATION SERVER' THEN 'No servers defined'\n      ELSE 'Unknown error'\n    END\n  ) AS state\n\nFROM erro_raiz_final\nWHERE\n  root_cause_group <> 'UNKNOWN'\n  AND $__timeFilter(execution_ts)\n\nORDER BY time;\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              }
+            }
+          ],
+          "title": "ERRO :: GRANULAR",
+          "type": "state-timeline"
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Exibe os _erros raiz não mapeados_ identificados nos testes do Speedtest (Ookla), após o processamento correto e normalização do log bruto.\n\nCada registro representa um _novo padrão de erro ainda não classificado_, consolidado por execução, utilizado como backlog técnico para evolução do mapeamento de códigos, severidade e grupos de erro.\n\nOs testes são executados a cada 5 minutos via cron no servidor Proxmox.\n\n---\n\nObservações técnicas:\n\n* Apenas _erros não mapeados_ (UNKNOWN) são exibidos\n\n* Cada execução gera _no máximo um erro raiz_\n\n* O timestamp embutido no log é removido durante o parsing\n\n* A priorização causal garante a identificação do _erro raiz primário_\n\n* Erros secundários em cascata são identificados, mas não duplicam registros\n\n* Erros já conhecidos não aparecem neste painel",
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 21
+          },
+          "id": 37,
+          "options": {
+            "dedupStrategy": "exact",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": false
+          },
+          "pluginVersion": "11.1.0",
+          "targets": [
+            {
+              "dataset": "speedtest_grafana",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "/* =====================================================================\n   PAINEL: ERROS NÃO MAPEADOS — BACKLOG (PRIMARY x SECONDARY)\n===================================================================== */\n\nWITH erros_split AS (\n\n  SELECT\n    e.timestamp AS execution_ts,\n    e.error_message AS raw_error_message,\n\n    TRIM(\n      REGEXP_REPLACE(\n        linha,\n        '\\\\[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9:.]+\\\\]',\n        ''\n      )\n    ) AS erro_linha\n\n  FROM speedtest_grafana.speedtest_ookla_errors e\n  JOIN JSON_TABLE(\n    CONCAT(\n      '[\"',\n      REPLACE(REPLACE(e.error_message, '\\r', ''), '\\n', '\",\"'),\n      '\"]'\n    ),\n    '$[*]' COLUMNS (linha TEXT PATH '$')\n  ) jt\n),\n\nerros_classificados AS (\n\n  SELECT\n    execution_ts,\n    raw_error_message,\n    erro_linha,\n\n    CASE\n      WHEN erro_linha LIKE '%non-initialized socket%' THEN 1\n      WHEN erro_linha LIKE '%resolve host name%' THEN 2\n      WHEN erro_linha LIKE '%Timeout%' THEN 3\n      WHEN erro_linha LIKE '%Latency test failed%' THEN 4\n      WHEN erro_linha LIKE '%Cannot retrieve configuration%' THEN 5\n      WHEN erro_linha LIKE '%No servers defined%' THEN 6\n      ELSE 99\n    END AS raiz_score,\n\n    CASE\n      WHEN erro_linha LIKE '%non-initialized socket%' THEN 'SOCKET'\n      WHEN erro_linha LIKE '%resolve host name%' THEN 'DNS'\n      WHEN erro_linha LIKE '%Timeout%' THEN 'TIMEOUT'\n      WHEN erro_linha LIKE '%Latency test failed%' THEN 'EXECUTION'\n      WHEN erro_linha LIKE '%Cannot retrieve configuration%' THEN 'CONFIGURATION'\n      WHEN erro_linha LIKE '%No servers defined%' THEN 'CONFIGURATION SERVER'\n      ELSE 'UNKNOWN'\n    END AS root_cause_group\n\n  FROM erros_split\n),\n\nexecucao_contexto AS (\n\n  /* Detecta se houve erro de socket na execução */\n  SELECT\n    execution_ts,\n    raw_error_message,\n    MAX(root_cause_group = 'SOCKET') AS has_socket\n  FROM erros_classificados\n  GROUP BY\n    execution_ts,\n    raw_error_message\n),\n\nerro_raiz_execucao AS (\n\n  SELECT\n    e.execution_ts,\n    e.raw_error_message,\n\n    /* Mensagem normalizada */\n    CASE\n      WHEN c.has_socket = 1\n           AND e.root_cause_group = 'DNS'\n      THEN CONCAT(e.erro_linha, ' by socket')\n      ELSE e.erro_linha\n    END AS root_error_message,\n\n    /* Ajuste de score para forçar primário */\n    CASE\n      WHEN c.has_socket = 1\n           AND e.root_cause_group = 'DNS'\n      THEN 90\n      ELSE e.raiz_score\n    END AS raiz_score,\n\n    e.root_cause_group\n\n  FROM erros_classificados e\n  JOIN execucao_contexto c\n    ON c.execution_ts = e.execution_ts\n   AND c.raw_error_message = e.raw_error_message\n),\n\nerro_raiz_final AS (\n\n  /* Escolhe 1 erro raiz por execução */\n  SELECT\n    execution_ts,\n    raw_error_message,\n\n    SUBSTRING_INDEX(\n      GROUP_CONCAT(root_error_message ORDER BY raiz_score),\n      ',',\n      1\n    ) AS root_error_message,\n\n    MIN(raiz_score) AS raiz_score,\n\n    SUBSTRING_INDEX(\n      GROUP_CONCAT(root_cause_group ORDER BY raiz_score),\n      ',',\n      1\n    ) AS root_cause_group\n\n  FROM erro_raiz_execucao\n  GROUP BY\n    execution_ts,\n    raw_error_message\n)\n\n-- ====================================================================\n-- SAÍDA FINAL\n-- ====================================================================\nSELECT\n\n  MAX(CONVERT_TZ(execution_ts, '-03:00', '+00:00')) AS time,\n  root_error_message AS message,\n  raw_error_message,\n\n  DATE_FORMAT(MIN(execution_ts), '%Y-%m-%d %H:%i:%s') AS first_occurrence,\n  DATE_FORMAT(MAX(execution_ts), '%Y-%m-%d %H:%i:%s') AS last_occurrence,\n\n  COUNT(*) AS occurrences,\n  root_cause_group,\n\n  999 AS error_code,\n  'Error not mapped' AS error_description,\n  'UNMAPPED' AS error_group,\n\n  CASE\n    WHEN MIN(raiz_score) = 1 THEN 'CRITICAL'\n    WHEN MIN(raiz_score) IN (2,3) THEN 'HIGH'\n    WHEN MIN(raiz_score) = 4 THEN 'LOW'\n    WHEN MIN(raiz_score) = 5 THEN 'MEDIUM'\n    ELSE 'ANALYSIS'\n  END AS severity\n\nFROM erro_raiz_final\nWHERE\n  root_cause_group = 'UNKNOWN'\nGROUP BY\n  root_error_message,\n  root_cause_group\nORDER BY\n  time DESC;\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [
+                      {
+                        "name": "erro",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "timestamp",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              },
+              "table": "speedtest_results"
+            }
+          ],
+          "title": "ERRO NÃO MAPEADO :: BACKLOG",
+          "transparent": true,
+          "type": "logs"
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Mostra o log bruto de erros gerados pelos testes do Speedtest (Ookla) executado a cada 5 minutos via cron no servidor Proxmox, considerando apenas as execuções do dia atual.\n\nEste painel exibe o erro exatamente como foi gravado no banco de dados, sem normalização, parsing ou classificação, servindo como referência para validação e comparação com os painéis de erro raiz, códigos e criticidade.",
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 27
+          },
+          "id": 13,
+          "options": {
+            "dedupStrategy": "exact",
+            "enableLogDetails": false,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": true,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "dataset": "speedtest_grafana",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "rawQuery": true,
+              "rawSql": "SELECT\n  error_message,\n  CONVERT_TZ(timestamp, '-03:00', '+00:00') AS time\nFROM speedtest_grafana.speedtest_ookla_errors\nWHERE\n  timestamp >= CURDATE()\n  AND timestamp < CURDATE() + INTERVAL 1 DAY\n  AND error_message IS NOT NULL\nORDER BY time ASC;\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [
+                      {
+                        "name": "erro",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "timestamp",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              },
+              "table": "speedtest_results"
+            }
+          ],
+          "title": "LOG ERRO BRUTO :: DIA ATUAL",
+          "transparent": true,
+          "type": "logs"
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Exibe os _erros raiz mapeados_ identificados nos testes do Speedtest (Ookla), considerando a primeira ocorrência de cada erro após o processamento correto do log.\n\nCada registro representa um _tipo de erro previamente classificado_, contendo a primeira ocorrência, a última ocorrência e a quantidade total de eventos, permitindo análise de recorrência, impacto operacional e estabilidade do serviço.\n\nOs testes são executados a cada 5 minutos via cron no servidor Proxmox.\n\n---\n\nObservações técnicas:\n\n* Apenas _erros previamente mapeados_ são exibidos\n\n* Cada erro é consolidado por _causa raiz_, evitando duplicidade\n\n* O timestamp embutido no log bruto é removido durante o parsing\n\n* A priorização causal garante a identificação do _erro raiz primário_\n\n* Erros secundários em cascata não geram novos registros\n\n* A agregação considera: \nprimeira ocorrência; \núltima ocorrência; \ntotal de ocorrências; \nseveridade; \ngrupo e código de erro.",
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 35
+          },
+          "id": 41,
+          "options": {
+            "dedupStrategy": "exact",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": true,
+            "sortOrder": "Ascending",
+            "wrapLogMessage": false
+          },
+          "pluginVersion": "11.1.0",
+          "targets": [
+            {
+              "dataset": "speedtest_grafana",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "/* =====================================================================\n   PAINEL: ERROS MAPEADOS — BACKLOG (PRIMARY x SECONDARY)\n===================================================================== */\n\nWITH erros_split AS (\n\n  SELECT\n    e.timestamp AS execution_ts,\n    e.error_message AS raw_error_message,\n\n    TRIM(\n      REGEXP_REPLACE(\n        linha,\n        '\\\\[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9:.]+\\\\]',\n        ''\n      )\n    ) AS erro_linha\n\n  FROM speedtest_grafana.speedtest_ookla_errors e\n  JOIN JSON_TABLE(\n    CONCAT(\n      '[\"',\n      REPLACE(REPLACE(e.error_message, '\\r', ''), '\\n', '\",\"'),\n      '\"]'\n    ),\n    '$[*]' COLUMNS (linha TEXT PATH '$')\n  ) jt\n),\n\nerros_classificados AS (\n\n  SELECT\n    execution_ts,\n    raw_error_message,\n    erro_linha,\n\n    CASE\n      WHEN erro_linha LIKE '%non-initialized socket%' THEN 1\n      WHEN erro_linha LIKE '%resolve host name%' THEN 2\n      WHEN erro_linha LIKE '%Timeout%' THEN 3\n      WHEN erro_linha LIKE '%Latency test failed%' THEN 4\n      WHEN erro_linha LIKE '%Cannot retrieve configuration%' THEN 5\n      WHEN erro_linha LIKE '%No servers defined%' THEN 6\n      ELSE 99\n    END AS raiz_score,\n\n    CASE\n      WHEN erro_linha LIKE '%non-initialized socket%' THEN 'SOCKET'\n      WHEN erro_linha LIKE '%resolve host name%' THEN 'DNS'\n      WHEN erro_linha LIKE '%Timeout%' THEN 'TIMEOUT'\n      WHEN erro_linha LIKE '%Latency test failed%' THEN 'EXECUTION'\n      WHEN erro_linha LIKE '%Cannot retrieve configuration%' THEN 'CONFIGURATION'\n      WHEN erro_linha LIKE '%No servers defined%' THEN 'CONFIGURATION SERVER'\n      ELSE 'UNKNOWN'\n    END AS root_cause_group\n\n  FROM erros_split\n),\n\nexecucao_contexto AS (\n\n  /* Detecta erro de socket na execução */\n  SELECT\n    execution_ts,\n    raw_error_message,\n    MAX(root_cause_group = 'SOCKET') AS has_socket\n  FROM erros_classificados\n  GROUP BY\n    execution_ts,\n    raw_error_message\n),\n\nerro_raiz_execucao AS (\n\n  SELECT\n    e.execution_ts,\n    e.raw_error_message,\n\n    /* Diferencia erro secundário */\n    CASE\n      WHEN c.has_socket = 1\n           AND e.root_cause_group = 'DNS'\n      THEN CONCAT(e.erro_linha, ' by socket')\n      ELSE e.erro_linha\n    END AS root_error_message,\n\n    /* Força DNS secundário para não ser raiz */\n    CASE\n      WHEN c.has_socket = 1\n           AND e.root_cause_group = 'DNS'\n      THEN 90\n      ELSE e.raiz_score\n    END AS raiz_score,\n\n    e.root_cause_group\n\n  FROM erros_classificados e\n  JOIN execucao_contexto c\n    ON c.execution_ts = e.execution_ts\n   AND c.raw_error_message = e.raw_error_message\n),\n\nerro_raiz_final AS (\n\n  /* Escolhe UM erro raiz por execução */\n  SELECT\n    execution_ts,\n    raw_error_message,\n\n    SUBSTRING_INDEX(\n      GROUP_CONCAT(root_error_message ORDER BY raiz_score),\n      ',',\n      1\n    ) AS root_error_message,\n\n    MIN(raiz_score) AS raiz_score,\n\n    SUBSTRING_INDEX(\n      GROUP_CONCAT(root_cause_group ORDER BY raiz_score),\n      ',',\n      1\n    ) AS root_cause_group\n\n  FROM erro_raiz_execucao\n  GROUP BY\n    execution_ts,\n    raw_error_message\n)\n\n-- ====================================================================\n-- SAÍDA FINAL\n-- ====================================================================\nSELECT\n\n  /* Obrigatório para Log Panel */\n  MIN(CONVERT_TZ(execution_ts, '-03:00', '+00:00')) AS time,\n\n  /* Linha do log */\n  root_error_message AS message,\n\n  /* Log bruto para análise */\n  raw_error_message,\n\n  /* Datas legíveis */\n  DATE_FORMAT(MIN(execution_ts), '%Y-%m-%d %H:%i:%s') AS first_occurrence,\n  DATE_FORMAT(MAX(execution_ts), '%Y-%m-%d %H:%i:%s') AS last_occurrence,\n\n  /* Quantidade */\n  COUNT(*) AS occurrences,\n\n  /* Causa raiz */\n  root_cause_group,\n\n  /* Código de erro */\n  CASE root_cause_group\n    WHEN 'DNS'           THEN 100\n    WHEN 'SOCKET'        THEN 150\n    WHEN 'TIMEOUT'       THEN 200\n    WHEN 'CONFIGURATION' THEN 400\n    WHEN 'CONFIGURATION SERVER' THEN 410\n    WHEN 'EXECUTION'     THEN 500\n    ELSE 999\n  END AS error_code,\n\n  /* Descrição */\n  CASE root_cause_group\n    WHEN 'DNS'           THEN 'DNS resolution failure'\n    WHEN 'SOCKET'        THEN 'Socket initialization failure'\n    WHEN 'TIMEOUT'       THEN 'Timeout reached'\n    WHEN 'CONFIGURATION' THEN 'Configuration retrieval failure'\n    WHEN 'EXECUTION'     THEN 'Execution failure'\n    WHEN 'CONFIGURATION SERVER' THEN 'No servers defined'\n    ELSE 'Unknown error'\n  END AS error_description,\n\n  /* Grupo */\n  CASE root_cause_group\n    WHEN 'DNS'           THEN 'NETWORK'\n    WHEN 'TIMEOUT'       THEN 'NETWORK'\n    WHEN 'SOCKET'        THEN 'SYSTEM'\n    WHEN 'EXECUTION'     THEN 'APPLICATION'\n    WHEN 'CONFIGURATION' THEN 'APPLICATION'\n    WHEN 'CONFIGURATION SERVER' THEN 'APPLICATION'\n    ELSE 'UNMAPPED'\n  END AS error_group,\n\n  /* Severidade */\n  CASE\n    WHEN MIN(raiz_score) = 1 THEN 'CRITICAL'\n    WHEN MIN(raiz_score) IN (2,3) THEN 'HIGH'\n    WHEN MIN(raiz_score) = 4 THEN 'LOW'\n    WHEN MIN(raiz_score) IN (5,6) THEN 'MEDIUM'\n    ELSE 'ANALYSIS'\n  END AS severity\n\nFROM erro_raiz_final\nWHERE\n  root_cause_group <> 'UNKNOWN'\nGROUP BY\n  root_error_message,\n  root_cause_group\nORDER BY\n  time ASC;\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [
+                      {
+                        "name": "erro",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "timestamp",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              },
+              "table": "speedtest_results"
+            }
+          ],
+          "title": "ERRO RAIZ MAPEADO :: LOG 1ª OCORRÊNCIA [ HISTÓRICO ]",
+          "transparent": true,
+          "type": "logs"
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "P1CDD0E9A0382A773"
+          },
+          "description": "Exibe uma tabela histórica dos erros raiz mapeados identificados nas execuções do Speedtest (Ookla), realizadas automaticamente a cada 5 minutos via cron no servidor Proxmox. O painel apresenta, para cada tipo de erro detectado, a sua primeira ocorrência histórica, permitindo uma visão consolidada dos problemas recorrentes no ambiente.\n\nO processo de análise normaliza e classifica os erros a partir do log bruto, exibindo o código do erro, a descrição padronizada, o grupo funcional e o nível de severidade. Essa abordagem facilita a identificação rápida de falhas estruturais, recorrências e pontos críticos de instabilidade.\n\n---\n\nObservações técnicas:\n\n* Ignora registros sem mensagem de erro (valores NULL ou vazios);\n\n* Normaliza logs que contêm múltiplas linhas em um único campo;\n\n* Remove timestamps embutidos no texto original do erro;\n\n* Identifica e seleciona apenas o erro raiz por execução, com base em prioridade causal;\n\n* Consolida erros equivalentes em uma única linha, exibindo a sua primeira ocorrência histórica real.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto",
+                  "wrapText": false
+                },
+                "filterable": false,
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "first_occurrence"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 200
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "error_code"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 112
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "error_description"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "error_group"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "severity"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 24,
+            "x": 0,
+            "y": 45
+          },
+          "id": 38,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "enablePagination": true,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "first_occurrence"
+              }
+            ]
+          },
+          "pluginVersion": "11.1.0",
+          "targets": [
+            {
+              "dataset": "speedtest_grafana",
+              "datasource": {
+                "type": "mysql",
+                "uid": "P1CDD0E9A0382A773"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "/* =====================================================================\n   TABLE — ERRO RAIZ MAPEADO (HISTÓRICO)\n   Alinhado ao painel canônico de erro raiz\n===================================================================== */\n\nWITH erros_split AS (\n\n  SELECT\n    e.timestamp AS execution_ts,\n\n    TRIM(\n      REGEXP_REPLACE(\n        jt.linha,\n        '\\\\[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9:.]+\\\\]',\n        ''\n      )\n    ) AS erro_linha\n\n  FROM speedtest_grafana.speedtest_ookla_errors e\n  JOIN JSON_TABLE(\n    CONCAT(\n      '[\"',\n      REPLACE(REPLACE(e.error_message, '\\r', ''), '\\n', '\",\"'),\n      '\"]'\n    ),\n    '$[*]' COLUMNS (linha TEXT PATH '$')\n  ) jt\n\n  WHERE\n    e.error_message IS NOT NULL\n    AND e.error_message <> ''\n),\n\nerros_classificados AS (\n\n  SELECT\n    execution_ts,\n    erro_linha,\n\n    /* ---------- RAIZ SCORE ---------- */\n    CASE\n      WHEN erro_linha LIKE '%non-initialized socket%' THEN 1\n      WHEN erro_linha LIKE '%resolve host name%' THEN 2\n      WHEN erro_linha LIKE '%Timeout%' THEN 3\n      WHEN erro_linha LIKE '%Latency test failed%' THEN 4\n      WHEN erro_linha LIKE '%Cannot retrieve configuration%' THEN 5\n      WHEN erro_linha LIKE '%No servers defined%' THEN 6\n      ELSE 99\n    END AS raiz_score,\n\n    /* ---------- ROOT CAUSE GROUP ---------- */\n    CASE\n      WHEN erro_linha LIKE '%non-initialized socket%' THEN 'SOCKET'\n      WHEN erro_linha LIKE '%resolve host name%' THEN 'DNS'\n      WHEN erro_linha LIKE '%Timeout%' THEN 'TIMEOUT'\n      WHEN erro_linha LIKE '%Latency test failed%' THEN 'EXECUTION'\n      WHEN erro_linha LIKE '%Cannot retrieve configuration%' THEN 'CONFIGURATION'\n      WHEN erro_linha LIKE '%No servers defined%' THEN 'CONFIGURATION SERVER'\n      ELSE 'UNKNOWN'\n    END AS root_cause_group\n\n  FROM erros_split\n),\n\nexecucao_contexto AS (\n\n  SELECT\n    execution_ts,\n    MAX(root_cause_group = 'SOCKET') AS has_socket\n  FROM erros_classificados\n  GROUP BY execution_ts\n),\n\nerro_raiz_execucao AS (\n\n  SELECT\n    e.execution_ts,\n\n    CASE\n      WHEN c.has_socket = 1\n           AND e.root_cause_group = 'DNS'\n      THEN 90\n      ELSE e.raiz_score\n    END AS raiz_score,\n\n    e.root_cause_group\n\n  FROM erros_classificados e\n  JOIN execucao_contexto c\n    ON c.execution_ts = e.execution_ts\n),\n\nerro_raiz_final AS (\n\n  SELECT\n    execution_ts,\n\n    SUBSTRING_INDEX(\n      GROUP_CONCAT(root_cause_group ORDER BY raiz_score),\n      ',',\n      1\n    ) AS root_cause_group,\n\n    MIN(raiz_score) AS raiz_score\n\n  FROM erro_raiz_execucao\n  GROUP BY execution_ts\n)\n\n-- ====================================================================\n-- SAÍDA FINAL — HISTÓRICO AGRUPADO\n-- ====================================================================\nSELECT\n  MIN(CONVERT_TZ(execution_ts, '-03:00', '+00:00')) AS first_occurrence,\n  #MAX(CONVERT_TZ(execution_ts, '-03:00', '+00:00')) AS last_occurrence,\n  COUNT(*) AS occurrences,\n\n  /* ---------- ERROR CODE ---------- */\n  CASE root_cause_group\n    WHEN 'DNS'           THEN 100\n    WHEN 'SOCKET'        THEN 150\n    WHEN 'TIMEOUT'       THEN 200\n    WHEN 'CONFIGURATION' THEN 400\n    WHEN 'CONFIGURATION SERVER' THEN 401\n    WHEN 'EXECUTION'     THEN 500\n    ELSE 999\n  END AS error_code,\n\n  /* ---------- DESCRIPTION ---------- */\n  CASE root_cause_group\n    WHEN 'DNS'           THEN 'DNS resolution failure'\n    WHEN 'SOCKET'        THEN 'Socket initialization failure'\n    WHEN 'TIMEOUT'       THEN 'Timeout reached'\n    WHEN 'CONFIGURATION' THEN 'Configuration retrieval failure'\n    WHEN 'EXECUTION'     THEN 'Execution failure'\n    WHEN 'CONFIGURATION SERVER' THEN 'No servers defined'\n    ELSE 'Unknown error'\n  END AS error_description,\n\n  /* ---------- GROUP ---------- */\n  CASE root_cause_group\n    WHEN 'DNS'           THEN 'NETWORK'\n    WHEN 'TIMEOUT'       THEN 'NETWORK'\n    WHEN 'SOCKET'        THEN 'SYSTEM'\n    WHEN 'CONFIGURATION' THEN 'APPLICATION'\n    WHEN 'CONFIGURATION SERVER' THEN 'APPLICATION'\n    WHEN 'EXECUTION'     THEN 'APPLICATION'\n    ELSE 'UNMAPPED'\n  END AS error_group,\n\n  /* ---------- SEVERITY ---------- */\n  CASE\n    WHEN MIN(raiz_score) = 1 THEN 'CRITICAL'\n    WHEN MIN(raiz_score) IN (2,3) THEN 'HIGH'\n    WHEN MIN(raiz_score) = 4 THEN 'LOW'\n    WHEN MIN(raiz_score) IN (5,6) THEN 'MEDIUM'\n    ELSE 'ANALYSIS'\n  END AS severity\n\nFROM erro_raiz_final\nWHERE root_cause_group <> 'UNKNOWN'\nGROUP BY root_cause_group\nORDER BY first_occurrence DESC;\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [
+                      {
+                        "name": "erro",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "timestamp",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              },
+              "table": "speedtest_results"
+            }
+          ],
+          "title": "ERRO RAIZ MAPEADO :: INFORMAÇÃO E SEVERIDADE [ HISTÓRICO ]",
+          "transparent": true,
+          "type": "table"
+        }
+      ],
+      "title": "ERROR",
+      "type": "row"
+    }
+  ],
+  "refresh": "5m",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "America/Sao_Paulo",
+  "title": "Internet - Elevalink - speedtest_grafana Ookla",
+  "uid": "bf7qjnniv3ncwb",
+  "version": 152,
+  "weekStart": "sunday"
+}

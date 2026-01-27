@@ -2,8 +2,13 @@
 
 ## local files
 #cronjob.sh
+ookla_speedtest_grafana_proxmox_dump-2026-01-26_1769478938.sql
+ookla-speedtest.sh
+README.md_old
+speedtest_db.sh
 speedtest_error.log
 speedtest.log
 speedtest.sh
 speedtest.sh_python
 speedtest_grafana_backup.sql
+speedtest_grafana_dashboard_20251203.json
